@@ -15,14 +15,14 @@ namespace HackedDesign
         [Header("State")]
         [SerializeField] private GameData data;
         [Header("Settings")]
-        [SerializeField] private float movementSpeed = 3.0f;
-        [SerializeField] private float rotationSpeed = 180.0f;
         [SerializeField] private float orbitSpeed = 180.0f;
 
 
         private Vector2 mousePosition;
         private Vector2 movement;
         private float orbit;
+
+        private Animator animator;
 
         void Awake()
         {
@@ -35,9 +35,11 @@ namespace HackedDesign
             {
                 mainCamera = Camera.main;
             }
+
+            animator = GetComponent<Animator>();
         }
 
-        void Update()
+        public void UpdateBehaviour()
         {
             RaycastHit hit;
             Ray ray = mainCamera.ScreenPointToRay(this.mousePosition);
@@ -54,10 +56,12 @@ namespace HackedDesign
 
             this.mainCamera.transform.rotation = Quaternion.Euler(this.mainCamera.transform.rotation.eulerAngles.x, this.mainCamera.transform.rotation.eulerAngles.y + orbit * orbitSpeed * Time.deltaTime, this.mainCamera.transform.rotation.eulerAngles.z);
 
+
+            Animate();
+
         }
 
-        // Update is called once per frame
-        void FixedUpdate()
+        public void FixedUpdateBehaviour()
         {
             rigidbody.MovePosition(this.transform.position + this.transform.forward * movement.y * Time.fixedDeltaTime * data.walkSpeed);
             rigidbody.MoveRotation(Quaternion.Euler(0, this.transform.rotation.eulerAngles.y + movement.x * data.rotateSpeed * Time.fixedDeltaTime, 0));
@@ -77,6 +81,11 @@ namespace HackedDesign
         {
             Debug.Log("Orbit");
             this.orbit = value.Get<float>();
+        }
+
+        private void Animate()
+        {
+            animator.SetFloat("Speed", this.movement.y);
         }
 
 

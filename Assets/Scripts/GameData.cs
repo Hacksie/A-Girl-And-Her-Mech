@@ -6,9 +6,10 @@ namespace HackedDesign
     public class GameData : ScriptableObject
     {
         public int wave = 1;
-        public float walkSpeed = 5.0f;
+        public float walkSpeed = 3.0f;
         public float rotateSpeed = 180.0f;
         public float heat = 0.0f;
+        public float baseHealth = 100.0f;
 
         public WeaponType leftArmWeapon;
         public WeaponType leftShoulderWeapon;
@@ -20,9 +21,10 @@ namespace HackedDesign
         public void Reset()
         {
             wave = 1;
-            walkSpeed = 5.0f;
+            walkSpeed = 2.5f;
             rotateSpeed = 180.0f;
             heat = 0;
+            baseHealth = 100.0f;
             leftArmWeapon = WeaponType.Cannon;
             leftShoulderWeapon = WeaponType.None;
             rightShoulderWeapon = WeaponType.None;

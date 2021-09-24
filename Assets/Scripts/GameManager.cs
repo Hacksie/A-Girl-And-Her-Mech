@@ -10,9 +10,10 @@ namespace HackedDesign
         [SerializeField] private PlayerController player = null;
         [Header("UI")]
         [SerializeField] private UI.IntroPresenter introPanel = null;
+        [SerializeField] private UI.BasePresenter basePanel = null;
         [Header("State")]
         [SerializeField] private GameData gameData;
-        
+
 
         private IState state = new EmptyState();
 
@@ -31,6 +32,7 @@ namespace HackedDesign
         }
 
         public PlayerController Player { get { return player; } private set { player = value; } }
+        public GameData GameData { get { return gameData; } private set { gameData = value; } }
 
         public static GameManager Instance { get; private set; }
 
@@ -48,7 +50,7 @@ namespace HackedDesign
             SetIntro();
         }
 
-        public void SetPlaying() => State = new PlayingState();
+        public void SetPlaying() => State = new PlayingState(Player, this.basePanel);
         public void SetMainMenu() => State = new MainMenuState();
         public void SetIntro() => State = new IntroState(this.introPanel);
 

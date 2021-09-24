@@ -13,9 +13,12 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   wave: 1
-  walkSpeed: 5
+  walkSpeed: 2.5
   rotateSpeed: 180
-  leftArmWeapon: 5
-  rightArmWeapon: 1
-  leftShoulder: 0
-  rightShoulder: 7
+  heat: 0
+  baseHealth: 100
+  leftArmWeapon: 1
+  leftShoulderWeapon: 0
+  rightShoulderWeapon: 0
+  radarWorking: 0
+  turretWorking: 0
