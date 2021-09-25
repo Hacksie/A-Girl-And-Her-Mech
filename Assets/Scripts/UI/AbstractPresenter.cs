@@ -6,10 +6,6 @@ namespace HackedDesign.UI
 {
     public abstract class AbstractPresenter : MonoBehaviour
     {
-        public void Awake()
-        {
-            Hide();
-        }
         
         public virtual void Show()
         {

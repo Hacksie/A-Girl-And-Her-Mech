@@ -1,28 +1,23 @@
-
+using UnityEngine;
 
 namespace HackedDesign
 {
-    public class IntroState : IState
+    public class DeadState : IState
     {
-        private UI.AbstractPresenter panel;
-
-        public IntroState(UI.IntroPresenter introPanel)
+        public DeadState()
         {
-            this.panel = introPanel;
         }
 
         public bool Playing => false;
 
         public void Begin()
         {
-            UnityEngine.Debug.Log("Begin");
-            this.panel.Show();
-            this.panel.Repaint();
+            Debug.Log("Dead!");
         }
 
         public void End()
         {
-            this.panel.Hide();
+            
         }
 
         public void FixedUpdate()

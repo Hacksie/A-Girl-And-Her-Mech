@@ -12,10 +12,13 @@ namespace HackedDesign
         [SerializeField] private Transform body;
         [SerializeField] private Transform aimPoint;
         [SerializeField] private new Rigidbody rigidbody;
+        [SerializeField] private WeaponsController weaponsController;
         [Header("State")]
         [SerializeField] private GameData data;
         [Header("Settings")]
-        [SerializeField] private float orbitSpeed = 180.0f;
+        [SerializeField] private GameSettings settings;
+        //[SerializeField] private float orbitSpeed = 180.0f;
+        [SerializeField] private LayerMask aimMask;
 
 
         private Vector2 mousePosition;
@@ -39,32 +42,36 @@ namespace HackedDesign
             animator = GetComponent<Animator>();
         }
 
+        public void Freeze()
+        {
+            this.movement = Vector3.zero;
+            Animate();
+        }
+
         public void UpdateBehaviour()
         {
-            RaycastHit hit;
-            Ray ray = mainCamera.ScreenPointToRay(this.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                aimPoint.transform.position = hit.point;
-                var rotation = Quaternion.LookRotation(aimPoint.position - this.transform.position, Vector3.up);
-                body.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
-                //Transform objectHit = hit.transform;
-
-                // Do something with the object that was hit by the raycast.
-            }
-
-            this.mainCamera.transform.rotation = Quaternion.Euler(this.mainCamera.transform.rotation.eulerAngles.x, this.mainCamera.transform.rotation.eulerAngles.y + orbit * orbitSpeed * Time.deltaTime, this.mainCamera.transform.rotation.eulerAngles.z);
-
+            this.mainCamera.transform.rotation = Quaternion.Euler(this.mainCamera.transform.rotation.eulerAngles.x, this.mainCamera.transform.rotation.eulerAngles.y + orbit * settings.orbitSpeed * Time.deltaTime, this.mainCamera.transform.rotation.eulerAngles.z);
 
             Animate();
-
         }
 
         public void FixedUpdateBehaviour()
         {
-            rigidbody.MovePosition(this.transform.position + this.transform.forward * movement.y * Time.fixedDeltaTime * data.walkSpeed);
-            rigidbody.MoveRotation(Quaternion.Euler(0, this.transform.rotation.eulerAngles.y + movement.x * data.rotateSpeed * Time.fixedDeltaTime, 0));
+            rigidbody.MovePosition(this.transform.position + this.transform.forward * movement.y * Time.fixedDeltaTime * (settings.walkSpeed + data.bonusWalkSpeed));
+            rigidbody.MoveRotation(Quaternion.Euler(0, this.transform.rotation.eulerAngles.y + movement.x * settings.rotateSpeed * Time.fixedDeltaTime, 0));
+
+            RaycastHit hit;
+            Ray ray = mainCamera.ScreenPointToRay(this.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100, aimMask))
+            {
+                //aimPoint.transform.position = hit.point;
+                var rotation = Quaternion.LookRotation(hit.point - this.transform.position, Vector3.up);
+                body.rotation = rotation; //Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+                //Transform objectHit = hit.transform;
+
+                // Do something with the object that was hit by the raycast.
+            }
         }
 
         public void OnMousePosition(InputValue value)
@@ -77,16 +84,115 @@ namespace HackedDesign
             this.movement = value.Get<Vector2>();
         }
 
+        public void OnFire()
+        {
+            if (GameManager.Instance.State.Playing)
+            {
+                weaponsController.FireCurrentWeapon();
+            }
+        }
+
+        public void OnCoolant()
+        {
+            if (GameManager.Instance.State.Playing)
+            {
+                data.UseCoolant();
+            }
+        }
+
         public void OnOrbit(InputValue value)
         {
             Debug.Log("Orbit");
             this.orbit = value.Get<float>();
         }
 
+        public void OnChangeWeapon(InputValue value)
+        {
+            var dir = value.Get<float>();
+
+            if (dir != 0)
+            {
+                
+                 data.selectedWeapon += dir != 0 ? 1 : -1;
+
+                    if (data.selectedWeapon > 3)
+                    {
+                        data.selectedWeapon = 0;
+                    }
+
+                    if (data.selectedWeapon < 0)
+                    {
+                        data.selectedWeapon = 3;
+                    }
+
+
+                // for (int i = 0; i < 4; i++)
+                // {
+                //     data.selectedWeapon += dir != 0 ? 1 : -1;
+
+                //     if (data.selectedWeapon > 3)
+                //     {
+                //         data.selectedWeapon = 0;
+                //     }
+
+                //     if (data.selectedWeapon < 0)
+                //     {
+                //         data.selectedWeapon = 3;
+                //     }
+
+                //     // if(weaponsController.GetCurrentWeapon().type != WeaponType.None)
+                //     // {
+                //     //     break;
+                //     // }
+
+                // }
+
+            }
+
+
+
+
+
+        }
+
+        public void OnRightArm()
+        {
+            if (data.rightArmWeapon != WeaponType.None)
+            {
+                data.selectedWeapon = 0;
+            }
+        }
+
+        public void OnLeftArm()
+        {
+            if (data.leftArmWeapon != WeaponType.None)
+            {
+                data.selectedWeapon = 1;
+            }
+        }
+
+        public void OnRightShoulder()
+        {
+            if (data.rightShoulderWeapon != WeaponType.None)
+            {
+                data.selectedWeapon = 2;
+            }
+        }
+
+        public void OnLeftShoulder()
+        {
+            if (data.leftShoulderWeapon != WeaponType.None)
+            {
+                data.selectedWeapon = 3;
+            }
+        }
+
         private void Animate()
         {
             animator.SetFloat("Speed", this.movement.y);
         }
+
+
 
 
     }

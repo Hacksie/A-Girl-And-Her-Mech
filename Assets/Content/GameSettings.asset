@@ -9,20 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2d6821e953c7ae45bdd7d355d27a1c3, type: 3}
-  m_Name: GameData
+  m_Script: {fileID: 11500000, guid: 8ef17e847d19de145a81ca7df5a75dab, type: 3}
+  m_Name: GameSettings
   m_EditorClassIdentifier: 
-  wave: 1
   totalWaves: 24
-  bonusWalkSpeed: 0
+  walkSpeed: 2.5
+  rotateSpeed: 180
+  orbitSpeed: 180
   maxBonusWalkSpeed: 5
-  baseHealth: 100
   maxBaseHealth: 100
-  selectedWeapon: 0
-  scrap: 666
-  armour: 100
-  heat: 0
-  coolant: 100
   maxHeat: 100
   maxCoolant: 100
   maxArmour: 100
@@ -30,15 +25,9 @@ MonoBehaviour:
   heatDamage: 3
   coolantDump: 25
   interWaveTimer: 15
-  waveTime: 0
-  leftArmWeapon: 2
-  rightArmWeapon: 1
-  leftShoulderWeapon: 0
-  rightShoulderWeapon: 6
-  leftArmWeaponTemp: 0
-  rightArmWeaponTemp: 0
-  leftShoulderWeaponTemp: 0
-  rightShoulderWeaponTemp: 0
-  radarWorking: 0
-  wturretWorking: 1
-  eturretWorking: 0
+  priceBaseHeal: 100
+  priceRepairMech: 22
+  priceSpeedInc: 250
+  priceRepairRadar: 500
+  priceRepairWTurret: 5000
+  priceRepairETurret: 5000
