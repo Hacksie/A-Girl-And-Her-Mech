@@ -17,28 +17,26 @@ MonoBehaviour:
   bonusWalkSpeed: 0
   maxBonusWalkSpeed: 5
   baseHealth: 100
-  maxBaseHealth: 100
-  selectedWeapon: 0
+  selectedWeapon: 1
   scrap: 666
   armour: 100
-  heat: 0
+  heat: 17.410334
   coolant: 100
-  maxHeat: 100
-  maxCoolant: 100
-  maxArmour: 100
   ambientHeatLoss: 1
   heatDamage: 3
   coolantDump: 25
   interWaveTimer: 15
-  waveTime: 0
+  incomingTimer: 5
+  intermissionTimer: 15
   leftArmWeapon: 2
   rightArmWeapon: 1
   leftShoulderWeapon: 0
-  rightShoulderWeapon: 6
+  rightShoulderWeapon: 7
   leftArmWeaponTemp: 0
   rightArmWeaponTemp: 0
   leftShoulderWeaponTemp: 0
   rightShoulderWeaponTemp: 0
   radarWorking: 0
-  wturretWorking: 1
+  wturretWorking: 0
   eturretWorking: 0
+  waveState: 1

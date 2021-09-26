@@ -13,7 +13,11 @@ namespace HackedDesign.UI
         [SerializeField] private UnityEngine.UI.Text healthText;
         [SerializeField] private UnityEngine.UI.Text heatText;
         [SerializeField] private UnityEngine.UI.Text coolantText;
+        [SerializeField] private UnityEngine.UI.Text scrapText;
         [SerializeField] private List<UnityEngine.UI.Image> weaponPanels;
+        [SerializeField] private UnityEngine.UI.Text laAmmoText;
+        [SerializeField] private UnityEngine.UI.Text rsAmmoText;
+        [SerializeField] private UnityEngine.UI.Text lsAmmoText;
         [SerializeField] private GameObject radarPanel;
 
         [SerializeField] private Color selected;
@@ -21,22 +25,25 @@ namespace HackedDesign.UI
 
         public override void Repaint()
         {
-            baseHealthbar.value = GameManager.Instance.GameData.baseHealth;
+            var data = GameManager.Instance.GameData; 
+            baseHealthbar.value = data.baseHealth;
 
-            healthBar.value = GameManager.Instance.GameData.armour;
-            heatBar.value = GameManager.Instance.GameData.heat;
-            coolantBar.value = GameManager.Instance.GameData.coolant;
+            healthBar.value = data.armour;
+            heatBar.value = data.heat;
+            coolantBar.value = data.coolant;
 
-            healthText.text = GameManager.Instance.GameData.armour.ToString("N0");
-            heatText.text = GameManager.Instance.GameData.heat.ToString("N0");
-            coolantText.text = GameManager.Instance.GameData.coolant.ToString("N0");
+            healthText.text = data.armour.ToString("N0");
+            heatText.text = data.heat.ToString("N0");
+            coolantText.text = data.coolant.ToString("N0");
+
+            scrapText.text = data.scrap.ToString("N0") + "kg";
 
             for (int i = 0; i < weaponPanels.Count; i++)
             {
-                weaponPanels[i].color = GameManager.Instance.GameData.selectedWeapon == i ? selected : unselected;
+                weaponPanels[i].color = data.selectedWeapon == i ? selected : unselected;
             }
 
-            radarPanel.SetActive(GameManager.Instance.GameData.radarWorking);
+            radarPanel.SetActive(data.radarWorking);
         }
     }
 }

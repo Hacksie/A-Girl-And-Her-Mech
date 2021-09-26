@@ -4,19 +4,22 @@ namespace HackedDesign
 {
     public class DeadState : IState
     {
-        public DeadState()
+        UI.AbstractPresenter deadPanel;
+        public DeadState(UI.AbstractPresenter deadPanel)
         {
+            this.deadPanel = deadPanel;
         }
 
         public bool Playing => false;
 
         public void Begin()
         {
-            Debug.Log("Dead!");
+            this.deadPanel.Show();
         }
 
         public void End()
         {
+            this.deadPanel.Hide();
             
         }
 

@@ -16,9 +16,11 @@ namespace HackedDesign
             //rigidbody = GetComponent<Rigidbody>();
         }
 
-        public void Fire(GameObject firer)
+        public void Fire(GameObject firer, float damage)
         {
+            timeout = 0.1f;
             this.firer = firer;
+            UnityEngine.Debug.Log("Fire laser");
 
             RaycastHit hit;
 
@@ -27,6 +29,12 @@ namespace HackedDesign
             if (Physics.Raycast(transform.position, transform.forward, out hit, distance, mask, QueryTriggerInteraction.Ignore))
             {
                 distance = (hit.point - transform.position).magnitude;
+
+                if(hit.transform && hit.transform.gameObject.CompareTag("Enemy"))
+                {
+                    var e = hit.transform.gameObject.GetComponent<Enemy>();
+                    e.Damage(damage);
+                }
             }
 
             List<Vector3> positions = new List<Vector3>();
@@ -40,6 +48,8 @@ namespace HackedDesign
             var array = positions.ToArray();
             line.positionCount = array.Length; 
             line.SetPositions(array);
+            line.enabled = true;
+            
         }
 
         private void Update()

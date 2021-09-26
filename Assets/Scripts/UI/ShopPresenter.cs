@@ -4,8 +4,6 @@ namespace HackedDesign.UI
 {
     public class ShopPresenter : AbstractPresenter
     {
-        [SerializeField] private UnityEngine.UI.Text scrapText;
-
         [SerializeField] private UnityEngine.UI.Button radarButton;
         [SerializeField] private UnityEngine.UI.Button turretWButton;
         [SerializeField] private UnityEngine.UI.Button turretEButton;
@@ -38,9 +36,6 @@ namespace HackedDesign.UI
 
         public override void Repaint()
         {
-            scrapText.text = GameManager.Instance.GameData.scrap.ToString("N0");
-
-
             UpdateInteractablity();
             UpdatePrices();
         }
@@ -48,13 +43,14 @@ namespace HackedDesign.UI
         private void UpdateInteractablity()
         {
             var data = GameManager.Instance.GameData;
+            var settings = GameManager.Instance.GameSettings;
             radarButton.interactable = !data.radarWorking;
             turretWButton.interactable = !data.wturretWorking;
             turretEButton.interactable = !data.eturretWorking;
 
-            turretEButton.interactable = data.bonusWalkSpeed < GameManager.Instance.GameData.maxBonusWalkSpeed;
-            mechButton.interactable = data.armour < GameManager.Instance.GameData.maxArmour;
-            baseButton.interactable = data.baseHealth < GameManager.Instance.GameData.maxBaseHealth;
+            turretEButton.interactable = data.bonusWalkSpeed < settings.maxBonusWalkSpeed;
+            mechButton.interactable = data.armour < settings.maxArmour;
+            baseButton.interactable = data.baseHealth < settings.maxBaseHealth;
 
             var currentWeapon = GameManager.Instance.Weapons.GetCurrentWeapon();
 

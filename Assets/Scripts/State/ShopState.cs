@@ -22,17 +22,19 @@ namespace HackedDesign
 
         public void Begin()
         {
+            Time.timeScale = 0;
             this.hudPanel.Show();
             this.shopPanel.Show();
             //shopCamera.gameObject.SetActive(true);
             mainCamera.gameObject.SetActive(false);
             GameManager.Instance.GameData.heat = 0;
-            GameManager.Instance.GameData.coolant = GameManager.Instance.GameData.maxCoolant;
+            GameManager.Instance.GameData.coolant = GameManager.Instance.GameSettings.maxCoolant;
             
         }
 
         public void End()
         {
+            Time.timeScale = 1;
             this.shopPanel.Hide();
             this.hudPanel.Hide();
             mainCamera.gameObject.SetActive(true);

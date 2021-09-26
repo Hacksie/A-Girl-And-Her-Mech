@@ -27,7 +27,21 @@ MonoBehaviour:
   interWaveTimer: 15
   priceBaseHeal: 100
   priceRepairMech: 22
-  priceSpeedInc: 250
-  priceRepairRadar: 500
-  priceRepairWTurret: 5000
-  priceRepairETurret: 5000
+  priceSpeedInc: 2000
+  priceRepairRadar: 1000
+  priceRepairWTurret: 10000
+  priceRepairETurret: 10000
+  priceCannon: 250
+  priceGattling: 1500
+  priceGauss: 2500
+  priceLaser: 1500
+  priceAutoCannon: 4000
+  priceMissiles: 5000
+  priceBulletAmmo: 10
+  priceMissileAmmo: 100
+  incomingTimer: 5
+  intermissionTimer: 15
+  spawnRange: 33
+  stopRange: 12.5
+  waves:
+  - {fileID: 11400000, guid: bc18c6c3e831cdc44875fd0b733fc769, type: 2}

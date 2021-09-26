@@ -8,13 +8,10 @@ namespace HackedDesign
 
         public int wave = 1;
         public int totalWaves = 24;
-        //public float walkSpeed = 3.0f;
-        //public float rotateSpeed = 180.0f;
         public int bonusWalkSpeed = 0;
         public int maxBonusWalkSpeed = 5;
 
         public float baseHealth = 100.0f;
-        public float maxBaseHealth = 100.0f;
         public int selectedWeapon = 0;
 
         public int scrap = 0;
@@ -23,16 +20,18 @@ namespace HackedDesign
         public float heat = 0.0f;
         public float coolant = 100.0f;
 
-        public float maxHeat = 100.0f;
-        public float maxCoolant = 100.0f;
-        public float maxArmour = 100.0f;
+        // public float maxHeat = 100.0f;
+        // public float maxCoolant = 100.0f;
+        // public float maxArmour = 100.0f;
 
         public float ambientHeatLoss = 1.0f;
         public float heatDamage = 3.0f;
         public float coolantDump = 25.0f;
 
+
         public float interWaveTimer = 15.0f;
-        public float waveTime = 0;
+        public float incomingTimer = 5;
+        public float intermissionTimer = 15;
 
         public WeaponType leftArmWeapon;
         public WeaponType rightArmWeapon;
@@ -48,6 +47,8 @@ namespace HackedDesign
         public bool wturretWorking = false;
         public bool eturretWorking = false;
 
+        public WaveState waveState;
+
         public void Reset()
         {
             wave = 1;
@@ -58,43 +59,36 @@ namespace HackedDesign
             selectedWeapon = 0;
             bonusWalkSpeed = 0;
             scrap = 666;
-            leftArmWeapon = WeaponType.LaserCannon;
+            incomingTimer = 5;
+            intermissionTimer = 15;
+            waveState = WaveState.Incoming;
+            leftArmWeapon = WeaponType.Cannon;
             rightArmWeapon = WeaponType.Claw;
-            leftShoulderWeapon = WeaponType.None;
+            leftShoulderWeapon = WeaponType.LaserCannon;
             rightShoulderWeapon = WeaponType.Missiles;
 
-            wturretWorking = true;
+            //wturretWorking = false;
         }
 
-        public void IncreaseArmour(float amount)
-        {
-            armour = Mathf.Clamp(armour + amount, 0, maxArmour);
-            if (armour <= 0)
-            {
-                GameManager.Instance.SetDead();
-            }
-        }
 
-        public void IncreaseHeat(float amount)
-        {
-            heat = Mathf.Max(0, heat + amount);
+    }
 
-            // if(heat >= 100)
-            // {
-            //     // Play overload effect
-            // }
-        }
+    public enum WaveState
+    {
+        Incoming,
+        Attacking,
+        Intermission
+    }    
 
-        public void UseCoolant()
-        {
-            if (coolant < (0 + coolantDump))
-                return;
-
-            coolant = Mathf.Max(0, coolant - coolantDump);
-
-            IncreaseHeat(-1 * coolantDump);
-
-        }
-
+    public enum WaveDirection
+    {
+        North,
+        NorthEast,
+        East,
+        SouthEast,
+        South,
+        SouthWest,
+        West,
+        NorthWest
     }
 }

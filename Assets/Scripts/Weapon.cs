@@ -21,11 +21,8 @@ namespace HackedDesign
             if(Time.time >= nextFireTime)
             {
                 nextFireTime = Time.time + fireRate;
-                Debug.Log("Fire " + type.ToString());
-
                 FireAmmo();
-
-                GameManager.Instance.GameData.IncreaseHeat(heat);
+                GameManager.Instance.IncreaseHeat(heat);
             }
         }
 

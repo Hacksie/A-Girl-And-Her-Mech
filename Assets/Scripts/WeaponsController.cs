@@ -45,6 +45,23 @@ namespace HackedDesign
             return weapon;
         }
 
+        public Weapon GetWeapon(int position)
+        {
+            switch(position)
+            {
+                case 3:
+                    return leftShoulder.FirstOrDefault(w => w.type == data.leftShoulderWeapon);
+                case 2:
+                    return rightShoulder.FirstOrDefault(w => w.type == data.rightShoulderWeapon); 
+                case 1:
+                    return leftArm.FirstOrDefault(w => w.type == data.leftArmWeapon);
+                default:
+                case 0:
+                    return rightArm.FirstOrDefault(w => w.type == data.rightArmWeapon);
+            }
+
+        }
+
         public void ClearTempWeapons()
         {
             data.leftShoulderWeaponTemp = WeaponType.None;

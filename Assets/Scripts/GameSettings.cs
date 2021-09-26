@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+
 
 namespace HackedDesign
 {
@@ -18,7 +20,7 @@ namespace HackedDesign
         public float maxCoolant = 100.0f;
         public float maxArmour = 100.0f;
 
-        public float ambientHeatLoss = 1.0f;
+        public float ambientHeatLoss = 2.0f;
         public float heatDamage = 3.0f;
         public float coolantDump = 25.0f;
 
@@ -40,5 +42,13 @@ namespace HackedDesign
 
         public int priceBulletAmmo = 10;
         public int priceMissileAmmo = 100;
+
+        public float incomingTimer = 5.0f;
+        public float intermissionTimer = 15.0f;
+
+        public float spawnRange = 50.0f;
+        public float stopRange = 12.5f;
+
+        public List<Wave> waves;
     }
 }

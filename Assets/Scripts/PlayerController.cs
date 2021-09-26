@@ -86,18 +86,20 @@ namespace HackedDesign
 
         public void OnFire()
         {
-            if (GameManager.Instance.State.Playing)
+            if (!GameManager.Instance.State.Playing)
             {
-                weaponsController.FireCurrentWeapon();
+                return;
             }
+            weaponsController.FireCurrentWeapon();
         }
 
         public void OnCoolant()
         {
-            if (GameManager.Instance.State.Playing)
+            if (!GameManager.Instance.State.Playing)
             {
-                data.UseCoolant();
+                return;
             }
+            GameManager.Instance.UseCoolant();
         }
 
         public void OnOrbit(InputValue value)
@@ -189,6 +191,7 @@ namespace HackedDesign
 
         private void Animate()
         {
+            animator.SetFloat("Rotation", this.movement.x);
             animator.SetFloat("Speed", this.movement.y);
         }
 
