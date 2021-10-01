@@ -9,6 +9,8 @@ namespace HackedDesign
         [SerializeField] public Transform parent;
         public List<Enemy> enemyPrefabs = new List<Enemy>();
         public List<Enemy> currentEnemies = new List<Enemy>();
+        public List<DestroyedEnemy> destroyedEnemies = new List<DestroyedEnemy>();
+
 
         void Awake()
         {
@@ -22,7 +24,17 @@ namespace HackedDesign
         {
             for (int i = 0; i < parent.transform.childCount; i++)
             {
-                Destroy(parent.transform.GetChild(i));
+                Destroy(parent.transform.GetChild(i).gameObject);
+            }
+        }
+
+        public void SpawnDestroyedEnemy(Enemy enemy)
+        {
+            var prefab = destroyedEnemies.FirstOrDefault(p => p.type == enemy.type);
+
+            if (prefab != null)
+            {
+                var e = Instantiate(prefab, enemy.transform.position, Quaternion.identity, parent);
             }
         }
 

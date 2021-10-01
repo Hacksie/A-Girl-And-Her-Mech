@@ -89,7 +89,7 @@ namespace HackedDesign
         {
             if (GameManager.Instance.GameData.heat >= GameManager.Instance.GameSettings.maxHeat)
             {
-                GameManager.Instance.IncreaseArmour(-1 * GameManager.Instance.GameData.heatDamage * Time.deltaTime);
+                GameManager.Instance.DamageArmour(GameManager.Instance.GameData.heatDamage * Time.deltaTime);
             }
         }
 

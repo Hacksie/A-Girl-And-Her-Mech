@@ -6,17 +6,23 @@ namespace HackedDesign
 {
     public class Pool : MonoBehaviour
     {
-        // FIXME: Actually pool !
+        
         [SerializeField] Transform parent;
         [SerializeField] Bullet bulletPrefab = null;
         [SerializeField] Bullet guassPrefab = null;
         [SerializeField] Bullet missilePrefab = null;
         [SerializeField] Laser laserPrefab = null;
 
+        [SerializeField] ParticleSystem explosionPrefab = null;
+        [SerializeField] ParticleSystem miniExplosionPrefab = null;
+
+
         private List<Bullet> bulletPool = new List<Bullet>();
         private List<Bullet> gaussPool = new List<Bullet>();
         private List<Bullet> missilePool = new List<Bullet>();
         private List<Laser> laserPool = new List<Laser>();
+        private List<ParticleSystem> explosionPool = new List<ParticleSystem>();
+        private List<ParticleSystem> miniExplosionPool = new List<ParticleSystem>();
 
         void Awake()
         {
@@ -33,6 +39,40 @@ namespace HackedDesign
                 Destroy(parent.transform.GetChild(i));
             }
         }
+
+        public void SpawnExplosion(Vector3 position)
+        {
+            ParticleSystem explosion = explosionPool.FirstOrDefault(e => !e.isPlaying);
+
+            if(explosion == null)
+            {
+                var go = Instantiate(explosionPrefab.gameObject, position, Quaternion.identity, parent);
+                explosion = go.GetComponent<ParticleSystem>();
+                explosionPool.Add(explosion);
+            }
+            explosion.transform.position = position;
+
+            //ParticleSystem ps = explosion.GetComponent<ParticleSystem>();
+
+            explosion.Play();
+        }
+
+        public void SpawnMiniExplosion(Vector3 position)
+        {
+            ParticleSystem explosion = miniExplosionPool.FirstOrDefault(e => !e.isPlaying);
+
+            if(explosion == null)
+            {
+                var go = Instantiate(miniExplosionPrefab.gameObject, position, Quaternion.identity, parent);
+                explosion = go.GetComponent<ParticleSystem>();
+                miniExplosionPool.Add(explosion);
+            }
+            explosion.transform.position = position;
+
+            //ParticleSystem ps = explosion.GetComponent<ParticleSystem>();
+
+            explosion.Play();
+        }        
 
         public void FireBullet(GameObject firer, Vector3 start, Vector3 forward, float damage)
         {

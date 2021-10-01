@@ -22,6 +22,7 @@ namespace HackedDesign.UI
         [SerializeField] private UnityEngine.UI.Text priceBaseHealText;
         [SerializeField] private UnityEngine.UI.Text priceRepairMechText;
         [SerializeField] private UnityEngine.UI.Text priceSpeedIncText;
+        [SerializeField] private UnityEngine.UI.Text priceHeatSinkText;
         [SerializeField] private UnityEngine.UI.Text priceRepairRadarText;
         [SerializeField] private UnityEngine.UI.Text priceRepairWTurretText;
         [SerializeField] private UnityEngine.UI.Text priceRepairETurretText;
@@ -69,6 +70,7 @@ namespace HackedDesign.UI
             priceBaseHealText.text = settings.priceBaseHeal.ToString("N0");
             priceRepairMechText.text = settings.priceRepairMech.ToString("N0");
             priceSpeedIncText.text = settings.priceSpeedInc.ToString("N0");
+            priceHeatSinkText.text = settings.priceHeatSink.ToString("N0");
             priceRepairRadarText.text = settings.priceRepairRadar.ToString("N0");
             priceRepairWTurretText.text = settings.priceRepairWTurret.ToString("N0");
             priceRepairETurretText.text = settings.priceRepairETurret.ToString("N0");
@@ -84,6 +86,24 @@ namespace HackedDesign.UI
         public void PlayClickEvent()
         {
             GameManager.Instance.SetPlaying();
+        }
+
+        public void RepairBaseClick()
+        {
+            if (GameManager.Instance.GameData.scrap >= GameManager.Instance.GameSettings.priceBaseHeal)
+            {
+                GameManager.Instance.DamageBase(-1 * GameManager.Instance.GameSettings.repairBaseHealth);
+                GameManager.Instance.GameData.scrap -= GameManager.Instance.GameSettings.priceBaseHeal;
+            }
+        }
+
+        public void RepairMechClick()
+        {
+            if (GameManager.Instance.GameData.scrap >= GameManager.Instance.GameSettings.priceRepairMech)
+            {
+                GameManager.Instance.DamageArmour(-1 * GameManager.Instance.GameSettings.repairMechArmour);
+                GameManager.Instance.GameData.scrap -= GameManager.Instance.GameSettings.priceRepairMech;
+            }
         }
 
         public void WeaponUnhover()

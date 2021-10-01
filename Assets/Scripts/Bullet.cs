@@ -28,9 +28,9 @@ namespace HackedDesign
         private void Update()
         {
             timeout -= Time.deltaTime;
-            if(timeout <= 0)
+            if (timeout <= 0)
             {
-                Explode();
+                Explode(this.transform.position);
             }
         }
 
@@ -38,21 +38,51 @@ namespace HackedDesign
         {
             if (!other.isTrigger && other.gameObject != this.firer)
             {
-                if(other.CompareTag("Enemy"))
+                if (other != null && other.CompareTag("Enemy"))
                 {
                     var e = other.GetComponent<Enemy>();
                     e.Damage(this.damage);
                 }
-                //Debug.Log("Explode");
+                if (other != null && other.CompareTag("Player") && !this.firer.CompareTag("Player"))
+                {
+                    GameManager.Instance.DamageArmour(damage);
+                }
+                if (other != null && other.CompareTag("Base") && !this.firer.CompareTag("Player"))
+                {
+                    GameManager.Instance.DamageBase(damage);
+                }
 
-
-                Explode();
+                Explode(this.transform.position);
             }
         }
 
-        private void Explode()
+        private void OnCollisionEnter(Collision other)
         {
-            
+            if (!other.collider.isTrigger && other.collider.gameObject != this.firer)
+            {
+                if (other.collider.CompareTag("Enemy"))
+                {
+                    var e = other.collider.GetComponent<Enemy>();
+                    e.Damage(this.damage);
+                }
+                if (other.collider.CompareTag("Base") && !this.firer.CompareTag("Player"))
+                {
+                    GameManager.Instance.DamageBase(damage);
+                }
+                if (other.collider.CompareTag("Player") && !this.firer.CompareTag("Player"))
+                {
+                    GameManager.Instance.DamageArmour(damage);
+                }
+                //Debug.Log("Explode");
+
+
+                Explode(this.transform.position);
+            }
+        }
+
+        private void Explode(Vector3 position)
+        {
+            GameManager.Instance.EntityPool.SpawnMiniExplosion(position);
             this.gameObject.SetActive(false);
         }
     }

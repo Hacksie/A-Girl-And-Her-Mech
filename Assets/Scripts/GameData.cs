@@ -7,11 +7,12 @@ namespace HackedDesign
     {
 
         public int wave = 1;
-        public int totalWaves = 24;
+        //public int totalWaves = 24;
         public int bonusWalkSpeed = 0;
-        public int maxBonusWalkSpeed = 5;
+        public int bonusHeatSink = 0;
+        
 
-        public float baseHealth = 100.0f;
+        public float baseHealth = 1000.0f;
         public int selectedWeapon = 0;
 
         public int scrap = 0;
@@ -48,29 +49,30 @@ namespace HackedDesign
         public bool eturretWorking = false;
 
         public WaveState waveState;
+        public UI.MenuState menuState;
 
         public void Reset()
         {
-            wave = 1;
+            wave = 0;
             heat = 0;
             armour = 100.0f;
             coolant = 100.0f;
-            baseHealth = 100.0f;
-            selectedWeapon = 0;
+            baseHealth = 1000.0f;
+            selectedWeapon = 1;
             bonusWalkSpeed = 0;
-            scrap = 666;
+            scrap = 0;
             incomingTimer = 5;
-            intermissionTimer = 15;
-            waveState = WaveState.Incoming;
+            intermissionTimer = 5;
+            waveState = WaveState.Intermission;
             leftArmWeapon = WeaponType.Cannon;
             rightArmWeapon = WeaponType.Claw;
-            leftShoulderWeapon = WeaponType.LaserCannon;
-            rightShoulderWeapon = WeaponType.Missiles;
-
-            //wturretWorking = false;
+            leftShoulderWeapon = WeaponType.None;
+            rightShoulderWeapon = WeaponType.None;
+            menuState = UI.MenuState.Play;
+            radarWorking = true;
+            wturretWorking = false;
+            eturretWorking = false;
         }
-
-
     }
 
     public enum WaveState

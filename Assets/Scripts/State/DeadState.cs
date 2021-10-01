@@ -14,6 +14,7 @@ namespace HackedDesign
 
         public void Begin()
         {
+            GameManager.Instance.Enemies.Reset();
             this.deadPanel.Show();
         }
 

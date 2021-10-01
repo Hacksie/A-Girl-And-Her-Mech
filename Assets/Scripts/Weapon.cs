@@ -13,37 +13,41 @@ namespace HackedDesign
         [SerializeField] public float fireRate = 0;
         [SerializeField] public float damage = 10;
         [SerializeField] public float heat = 10;
+        [SerializeField] public Sprite sprite;
 
         private float nextFireTime = 0;
 
         public void Fire()
         {
-            if(Time.time >= nextFireTime)
+            if (Time.time >= nextFireTime)
             {
                 nextFireTime = Time.time + fireRate;
                 FireAmmo();
-                GameManager.Instance.IncreaseHeat(heat);
+                if (parent == GameManager.Instance.Player)
+                {
+                    GameManager.Instance.IncreaseHeat(heat);
+                }
             }
         }
 
         private void FireAmmo()
         {
-            switch(ammoType)
+            switch (ammoType)
             {
                 case AmmoType.Bullet:
-                GameManager.Instance.EntityPool.FireBullet(parent, firePoint.position, firePoint.forward, damage);
-                break;
+                    GameManager.Instance.EntityPool.FireBullet(parent, firePoint.position, firePoint.forward, damage);
+                    break;
                 case AmmoType.Guass:
-                GameManager.Instance.EntityPool.FireGuass(parent, firePoint.position, firePoint.forward, damage);
-                break;
+                    GameManager.Instance.EntityPool.FireGuass(parent, firePoint.position, firePoint.forward, damage);
+                    break;
                 case AmmoType.Missile:
-                GameManager.Instance.EntityPool.FireMissile(parent, firePoint.position, firePoint.forward, damage);
-                break;
+                    GameManager.Instance.EntityPool.FireMissile(parent, firePoint.position, firePoint.forward, damage);
+                    break;
                 case AmmoType.Laser:
-                GameManager.Instance.EntityPool.FireLaser(parent, firePoint.position, firePoint.forward, damage);
-                break;
+                    GameManager.Instance.EntityPool.FireLaser(parent, firePoint.position, firePoint.forward, damage);
+                    break;
                 case AmmoType.Claw:
-                break;
+                    break;
             }
 
 

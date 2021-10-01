@@ -19,13 +19,16 @@ namespace HackedDesign.UI
         [SerializeField] private UnityEngine.UI.Text rsAmmoText;
         [SerializeField] private UnityEngine.UI.Text lsAmmoText;
         [SerializeField] private GameObject radarPanel;
+        [SerializeField] private List<UnityEngine.UI.Image> weaponSprites;
 
         [SerializeField] private Color selected;
         [SerializeField] private Color unselected;
 
+        [SerializeField] private List<UnityEngine.UI.Image> enemyRadarSprites;
+
         public override void Repaint()
         {
-            var data = GameManager.Instance.GameData; 
+            var data = GameManager.Instance.GameData;
             baseHealthbar.value = data.baseHealth;
 
             healthBar.value = data.armour;
@@ -41,9 +44,42 @@ namespace HackedDesign.UI
             for (int i = 0; i < weaponPanels.Count; i++)
             {
                 weaponPanels[i].color = data.selectedWeapon == i ? selected : unselected;
+                var s = GameManager.Instance.Weapons.GetWeapon(i).sprite;
+                if (s != null)
+                {
+                    weaponSprites[i].gameObject.SetActive(true);
+                    weaponSprites[i].sprite = s;
+                }
+                else
+                {
+                    weaponSprites[i].gameObject.SetActive(false);
+                }
             }
 
             radarPanel.SetActive(data.radarWorking);
+            // if (data.radarWorking)
+            // {
+            //     UpdateRadar();
+            // }
         }
+
+        // private void UpdateRadar()
+        // {
+
+        //     var enemies = GameManager.Instance.Enemies.currentEnemies;
+        //     for (int i = 0; i < enemyRadarSprites.Count; i++)
+        //     {
+        //         if (i < enemies.Count)
+        //         {
+        //             enemyRadarSprites[i].gameObject.SetActive(true);
+        //             //enemyRadarSprites[i].transform.localPosition = new Vector2(enemies[i].transform.position.x / 5, enemies[i].transform.position.z / 5);
+        //             enemyRadarSprites[i].rectTransform.localPosition = new Vector2(enemies[i].transform.position.x / 5, enemies[i].transform.position.z / 5);
+        //         }
+        //         else
+        //         {
+        //             enemyRadarSprites[i].gameObject.SetActive(false);
+        //         }
+        //     }
+        // }
     }
 }

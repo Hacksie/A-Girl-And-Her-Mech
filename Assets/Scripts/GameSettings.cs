@@ -12,9 +12,10 @@ namespace HackedDesign
         public float rotateSpeed = 180.0f;
         public float orbitSpeed = 180.0f;
         public int maxBonusWalkSpeed = 5;
+        public int maxBonusHeatSink = 5;
 
         
-        public float maxBaseHealth = 100.0f;
+        public float maxBaseHealth = 1000.0f;
 
         public float maxHeat = 100.0f;
         public float maxCoolant = 100.0f;
@@ -26,10 +27,14 @@ namespace HackedDesign
 
         public float interWaveTimer = 15.0f;
 
+        public int repairBaseHealth = 100;
+        public int repairMechArmour = 10;
+
         public int priceBaseHeal = 100;
         public int priceRepairMech = 22;
         public int priceSpeedInc = 250;
-        public int priceRepairRadar = 500;
+        public int priceHeatSink = 333;
+        public int priceRepairRadar = 750;
         public int priceRepairWTurret = 5000;
         public int priceRepairETurret = 5000;
 
@@ -48,6 +53,13 @@ namespace HackedDesign
 
         public float spawnRange = 50.0f;
         public float stopRange = 12.5f;
+        public float turretRange = 25.0f;
+
+        public int baseExplosionCount = 10;
+        public float baseExplosionRadius = 6.0f;
+        public float behaviourShiftTime = 15.0f;
+
+        public Vector3 startPosition = new Vector3(-5,0,0);
 
         public List<Wave> waves;
     }

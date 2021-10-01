@@ -17,7 +17,7 @@ MonoBehaviour:
   rotateSpeed: 180
   orbitSpeed: 180
   maxBonusWalkSpeed: 5
-  maxBaseHealth: 100
+  maxBaseHealth: 1000
   maxHeat: 100
   maxCoolant: 100
   maxArmour: 100
@@ -25,6 +25,8 @@ MonoBehaviour:
   heatDamage: 3
   coolantDump: 25
   interWaveTimer: 15
+  repairBaseHealth: 100
+  repairMechArmour: 10
   priceBaseHeal: 100
   priceRepairMech: 22
   priceSpeedInc: 2000
@@ -43,5 +45,6 @@ MonoBehaviour:
   intermissionTimer: 15
   spawnRange: 33
   stopRange: 12.5
+  startPosition: {x: -3.5, y: 0, z: 0}
   waves:
   - {fileID: 11400000, guid: bc18c6c3e831cdc44875fd0b733fc769, type: 2}

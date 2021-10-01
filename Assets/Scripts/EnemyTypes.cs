@@ -8,6 +8,7 @@ namespace HackedDesign
         HeavyTank,
         Drone,
         LightMech,
+        MediumMech,
         HeavyMech
 
     }

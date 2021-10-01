@@ -19,6 +19,7 @@ namespace HackedDesign
         [SerializeField] private GameSettings settings;
         //[SerializeField] private float orbitSpeed = 180.0f;
         [SerializeField] private LayerMask aimMask;
+        [SerializeField] private LayerMask crosshairMask;
 
 
         private Vector2 mousePosition;
@@ -42,6 +43,12 @@ namespace HackedDesign
             animator = GetComponent<Animator>();
         }
 
+        public void Reset()
+        {
+            this.transform.position = GameManager.Instance.GameSettings.startPosition;
+            this.transform.rotation = Quaternion.identity;
+        }
+
         public void Freeze()
         {
             this.movement = Vector3.zero;
@@ -52,6 +59,34 @@ namespace HackedDesign
         {
             this.mainCamera.transform.rotation = Quaternion.Euler(this.mainCamera.transform.rotation.eulerAngles.x, this.mainCamera.transform.rotation.eulerAngles.y + orbit * settings.orbitSpeed * Time.deltaTime, this.mainCamera.transform.rotation.eulerAngles.z);
 
+            RaycastHit hit;
+            Ray ray = mainCamera.ScreenPointToRay(this.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 100, aimMask))
+            {
+
+                var rotation = Quaternion.LookRotation(hit.point - this.transform.position, Vector3.up);
+                body.rotation = rotation; //Quaternion.Euler(0, rotation.eulerAngles.y, 0);
+
+                RaycastHit aimHit;
+
+                if (Physics.Raycast(body.position + Vector3.up, body.forward, out aimHit, 5, crosshairMask))
+                {
+                    aimPoint.transform.position = aimHit.point;
+                }
+                else
+                {
+                    aimPoint.transform.position = body.position  + Vector3.up + (body.forward * 5);
+                }
+
+                //aimPoint.transform.position = this.transform.position + (this.transform.forward * 5);
+                aimPoint.transform.LookAt(body.position, Vector3.up);
+
+                //Transform objectHit = hit.transform;
+
+                // Do something with the object that was hit by the raycast.
+            }
+
             Animate();
         }
 
@@ -60,18 +95,7 @@ namespace HackedDesign
             rigidbody.MovePosition(this.transform.position + this.transform.forward * movement.y * Time.fixedDeltaTime * (settings.walkSpeed + data.bonusWalkSpeed));
             rigidbody.MoveRotation(Quaternion.Euler(0, this.transform.rotation.eulerAngles.y + movement.x * settings.rotateSpeed * Time.fixedDeltaTime, 0));
 
-            RaycastHit hit;
-            Ray ray = mainCamera.ScreenPointToRay(this.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 100, aimMask))
-            {
-                //aimPoint.transform.position = hit.point;
-                var rotation = Quaternion.LookRotation(hit.point - this.transform.position, Vector3.up);
-                body.rotation = rotation; //Quaternion.Euler(0, rotation.eulerAngles.y, 0);
-                //Transform objectHit = hit.transform;
-
-                // Do something with the object that was hit by the raycast.
-            }
         }
 
         public void OnMousePosition(InputValue value)
@@ -114,47 +138,19 @@ namespace HackedDesign
 
             if (dir != 0)
             {
-                
-                 data.selectedWeapon += dir != 0 ? 1 : -1;
 
-                    if (data.selectedWeapon > 3)
-                    {
-                        data.selectedWeapon = 0;
-                    }
+                data.selectedWeapon += dir != 0 ? 1 : -1;
 
-                    if (data.selectedWeapon < 0)
-                    {
-                        data.selectedWeapon = 3;
-                    }
+                if (data.selectedWeapon > 3)
+                {
+                    data.selectedWeapon = 0;
+                }
 
-
-                // for (int i = 0; i < 4; i++)
-                // {
-                //     data.selectedWeapon += dir != 0 ? 1 : -1;
-
-                //     if (data.selectedWeapon > 3)
-                //     {
-                //         data.selectedWeapon = 0;
-                //     }
-
-                //     if (data.selectedWeapon < 0)
-                //     {
-                //         data.selectedWeapon = 3;
-                //     }
-
-                //     // if(weaponsController.GetCurrentWeapon().type != WeaponType.None)
-                //     // {
-                //     //     break;
-                //     // }
-
-                // }
-
+                if (data.selectedWeapon < 0)
+                {
+                    data.selectedWeapon = 3;
+                }
             }
-
-
-
-
-
         }
 
         public void OnRightArm()
