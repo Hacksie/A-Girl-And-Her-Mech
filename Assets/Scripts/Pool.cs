@@ -6,7 +6,7 @@ namespace HackedDesign
 {
     public class Pool : MonoBehaviour
     {
-        
+
         [SerializeField] Transform parent;
         [SerializeField] Bullet bulletPrefab = null;
         [SerializeField] Bullet guassPrefab = null;
@@ -38,22 +38,30 @@ namespace HackedDesign
             {
                 Destroy(parent.transform.GetChild(i));
             }
+            bulletPool.Clear();
+            gaussPool.Clear();
+            missilePool.Clear();
+            laserPool.Clear();
+            explosionPool.Clear();
+            miniExplosionPool.Clear();
         }
 
         public void SpawnExplosion(Vector3 position)
         {
             ParticleSystem explosion = explosionPool.FirstOrDefault(e => !e.isPlaying);
 
-            if(explosion == null)
+            if (explosion == null)
             {
                 var go = Instantiate(explosionPrefab.gameObject, position, Quaternion.identity, parent);
                 explosion = go.GetComponent<ParticleSystem>();
                 explosionPool.Add(explosion);
             }
+            var sfx = explosion.GetComponentInChildren<AudioSource>();
+            if (sfx != null)
+            {
+                sfx.Play();
+            }
             explosion.transform.position = position;
-
-            //ParticleSystem ps = explosion.GetComponent<ParticleSystem>();
-
             explosion.Play();
         }
 
@@ -61,18 +69,23 @@ namespace HackedDesign
         {
             ParticleSystem explosion = miniExplosionPool.FirstOrDefault(e => !e.isPlaying);
 
-            if(explosion == null)
+            if (explosion == null)
             {
                 var go = Instantiate(miniExplosionPrefab.gameObject, position, Quaternion.identity, parent);
                 explosion = go.GetComponent<ParticleSystem>();
                 miniExplosionPool.Add(explosion);
             }
+
+            var sfx = explosion.GetComponentInChildren<AudioSource>();
+            if (sfx != null)
+            {
+                sfx.Play();
+            }
             explosion.transform.position = position;
-
-            //ParticleSystem ps = explosion.GetComponent<ParticleSystem>();
-
             explosion.Play();
-        }        
+
+
+        }
 
         public void FireBullet(GameObject firer, Vector3 start, Vector3 forward, float damage)
         {
@@ -84,8 +97,6 @@ namespace HackedDesign
                 bullet = go.GetComponent<Bullet>();
                 bulletPool.Add(bullet);
             }
-
-            Debug.Log(bullet.name);
 
             bullet.gameObject.SetActive(true);
             bullet.transform.position = start;
@@ -105,8 +116,6 @@ namespace HackedDesign
                 gaussPool.Add(bullet);
             }
 
-            
-
             bullet.gameObject.SetActive(true);
             bullet.transform.position = start;
             bullet.transform.forward = forward;
@@ -123,8 +132,6 @@ namespace HackedDesign
                 bullet = go.GetComponent<Bullet>();
                 missilePool.Add(bullet);
             }
-
-
 
             bullet.gameObject.SetActive(true);
             bullet.transform.position = start;
@@ -148,10 +155,6 @@ namespace HackedDesign
             bullet.transform.forward = forward;
 
             bullet.Fire(firer, damage);
-
-
         }
-
-
     }
 }

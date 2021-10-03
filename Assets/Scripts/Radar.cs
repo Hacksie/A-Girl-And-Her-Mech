@@ -7,9 +7,8 @@ namespace HackedDesign
         [SerializeField] private float brokenAngle;
         [SerializeField] private float fixedAngle;
 
-        void Update()
-        {
+        void Update() =>
             transform.rotation = Quaternion.Euler(GameManager.Instance.GameData.radarWorking ? fixedAngle : brokenAngle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
-        }
+        
     }
 }

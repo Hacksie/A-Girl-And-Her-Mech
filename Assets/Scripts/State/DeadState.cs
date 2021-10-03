@@ -21,22 +21,18 @@ namespace HackedDesign
         public void End()
         {
             this.deadPanel.Hide();
-            
         }
 
         public void FixedUpdate()
         {
-            
         }
 
         public void Start()
         {
-            
         }
 
         public void Update()
         {
-            
         }
     }
 

@@ -13,6 +13,7 @@ namespace HackedDesign
             if(other.CompareTag("Player"))
             {
                 GameManager.Instance.IncreaseScrap(scrap);
+                AudioManager.Instance.PlayPickup();
                 this.gameObject.SetActive(false);
                 Destroy(this);
             }

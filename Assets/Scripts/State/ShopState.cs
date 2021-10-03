@@ -39,18 +39,15 @@ namespace HackedDesign
             this.hudPanel.Hide();
             mainCamera.gameObject.SetActive(true);
             shopCameras.ForEach((camera) => camera.gameObject.SetActive(false));
-            GameManager.Instance.Weapons.ClearTempWeapons();
-            //shopCamera.gameObject.SetActive(false);
+            GameManager.Instance.Player.Weapons.ClearTempWeapons();
         }
 
         public void FixedUpdate()
         {
-
         }
 
         public void Start()
         {
-
         }
 
         public void Update()
@@ -64,7 +61,7 @@ namespace HackedDesign
         {
             for(int i=0;i<shopCameras.Count;i++)
             {
-                shopCameras[i].gameObject.SetActive(i == GameManager.Instance.GameData.selectedWeapon);
+                shopCameras[i].gameObject.SetActive((WeaponPosition)i == GameManager.Instance.Player.Weapons.selectedWeapon);
             }
         }
     }

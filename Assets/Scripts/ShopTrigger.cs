@@ -6,8 +6,9 @@ namespace HackedDesign
     {
         void OnTriggerEnter(Collider other)
         {
-            if(other.CompareTag("Player"))
+            if (GameManager.Instance.State.Playing && other.CompareTag("Player"))
             {
+                AudioManager.Instance.PlayPickup();
                 GameManager.Instance.SetShop();
             }
         }

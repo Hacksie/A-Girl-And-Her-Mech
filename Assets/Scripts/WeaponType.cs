@@ -20,4 +20,12 @@ namespace HackedDesign
         Bullet,
         Missile
     }
+
+    public enum WeaponPosition
+    {
+        RightArm,
+        LeftArm,
+        RightShoulder,
+        LeftShoulder
+    }
 }

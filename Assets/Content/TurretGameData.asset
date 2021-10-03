@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2d6821e953c7ae45bdd7d355d27a1c3, type: 3}
+  m_Name: TurretGameData
+  m_EditorClassIdentifier: 
+  wave: 0
+  bonusWalkSpeed: 0
+  bonusHeatSink: 0
+  baseHealth: 1000
+  selectedWeapon: 0
+  scrap: 10000
+  armour: 100
+  heat: 0
+  coolant: 100
+  ambientHeatLoss: 1
+  heatDamage: 3
+  coolantDump: 25
+  interWaveTimer: 15
+  incomingTimer: 5
+  intermissionTimer: 5
+  leftArmWeapon: 0
+  rightArmWeapon: 7
+  leftShoulderWeapon: 0
+  rightShoulderWeapon: 0
+  leftArmWeaponTemp: 0
+  rightArmWeaponTemp: 0
+  leftShoulderWeaponTemp: 0
+  rightShoulderWeaponTemp: 0
+  radarWorking: 0
+  wturretWorking: 0
+  eturretWorking: 0
+  waveState: 2
+  menuState: 0

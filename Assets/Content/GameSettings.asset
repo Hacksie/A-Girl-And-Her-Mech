@@ -17,6 +17,7 @@ MonoBehaviour:
   rotateSpeed: 180
   orbitSpeed: 180
   maxBonusWalkSpeed: 5
+  maxBonusHeatSink: 5
   maxBaseHealth: 1000
   maxHeat: 100
   maxCoolant: 100
@@ -27,24 +28,30 @@ MonoBehaviour:
   interWaveTimer: 15
   repairBaseHealth: 100
   repairMechArmour: 10
-  priceBaseHeal: 100
+  priceBaseHeal: 75
   priceRepairMech: 22
-  priceSpeedInc: 2000
-  priceRepairRadar: 1000
+  priceSpeedInc: 1000
+  priceHeatSink: 333
+  priceRepairRadar: 750
   priceRepairWTurret: 10000
   priceRepairETurret: 10000
   priceCannon: 250
-  priceGattling: 1500
-  priceGauss: 2500
-  priceLaser: 1500
-  priceAutoCannon: 4000
-  priceMissiles: 5000
-  priceBulletAmmo: 10
-  priceMissileAmmo: 100
+  priceGattling: 750
+  priceGauss: 2000
+  priceLaser: 1250
+  priceAutoCannon: 3500
+  priceMissiles: 4000
   incomingTimer: 5
   intermissionTimer: 15
   spawnRange: 33
   stopRange: 12.5
-  startPosition: {x: -3.5, y: 0, z: 0}
+  turretRange: 25
+  baseExplosionCount: 10
+  baseExplosionRadius: 6
+  behaviourShiftTime: 15
+  shootIntensity: 1
+  hitIntensity: 1
+  clawRange: 0.7
+  startPosition: {x: 0, y: 0, z: -0.5}
   waves:
   - {fileID: 11400000, guid: bc18c6c3e831cdc44875fd0b733fc769, type: 2}

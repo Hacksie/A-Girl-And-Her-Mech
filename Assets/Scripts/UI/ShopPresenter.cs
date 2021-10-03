@@ -8,6 +8,7 @@ namespace HackedDesign.UI
         [SerializeField] private UnityEngine.UI.Button turretWButton;
         [SerializeField] private UnityEngine.UI.Button turretEButton;
         [SerializeField] private UnityEngine.UI.Button walkSpeedButton;
+        [SerializeField] private UnityEngine.UI.Button heatSinkButton;
         [SerializeField] private UnityEngine.UI.Button mechButton;
         [SerializeField] private UnityEngine.UI.Button baseButton;
         [SerializeField] private UnityEngine.UI.Button cannonButton;
@@ -49,38 +50,39 @@ namespace HackedDesign.UI
             turretWButton.interactable = !data.wturretWorking;
             turretEButton.interactable = !data.eturretWorking;
 
-            turretEButton.interactable = data.bonusWalkSpeed < settings.maxBonusWalkSpeed;
+            walkSpeedButton.interactable = data.bonusWalkSpeed < settings.maxBonusWalkSpeed;
+            heatSinkButton.interactable = data.bonusHeatSink < settings.maxBonusHeatSink;
             mechButton.interactable = data.armour < settings.maxArmour;
             baseButton.interactable = data.baseHealth < settings.maxBaseHealth;
 
-            var currentWeapon = GameManager.Instance.Weapons.GetCurrentWeapon();
+            var currentWeapon = GameManager.Instance.Player.Weapons.GetCurrentWeapon();
 
-            cannonButton.interactable = data.selectedWeapon >= 1 && currentWeapon.type != WeaponType.Cannon;
-            gattlingButton.interactable = data.selectedWeapon >= 1 && currentWeapon.type != WeaponType.GattlingGun;
-            gaussButton.interactable = data.selectedWeapon >= 1 && currentWeapon.type != WeaponType.Gauss;
-            laserButton.interactable = data.selectedWeapon >= 1 && currentWeapon.type != WeaponType.LaserCannon;
-            autoButton.interactable = data.selectedWeapon >= 1 && currentWeapon.type != WeaponType.AutoCannon;
-            missileButton.interactable = data.selectedWeapon >= 2 && currentWeapon.type != WeaponType.Missiles;
+            cannonButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.Cannon;
+            gattlingButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.GattlingGun;
+            gaussButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.Gauss;
+            laserButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.LaserCannon;
+            autoButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.AutoCannon;
+            missileButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.RightShoulder && currentWeapon.type != WeaponType.Missiles;
             ammoButton.interactable = currentWeapon.ammoType == AmmoType.Bullet || currentWeapon.ammoType == AmmoType.Missile;
         }
 
         private void UpdatePrices()
         {
             var settings = GameManager.Instance.GameSettings;
-            priceBaseHealText.text = settings.priceBaseHeal.ToString("N0");
-            priceRepairMechText.text = settings.priceRepairMech.ToString("N0");
-            priceSpeedIncText.text = settings.priceSpeedInc.ToString("N0");
-            priceHeatSinkText.text = settings.priceHeatSink.ToString("N0");
-            priceRepairRadarText.text = settings.priceRepairRadar.ToString("N0");
-            priceRepairWTurretText.text = settings.priceRepairWTurret.ToString("N0");
-            priceRepairETurretText.text = settings.priceRepairETurret.ToString("N0");
+            priceBaseHealText.text = settings.priceBaseHeal.ToString("N0") + "kg";
+            priceRepairMechText.text = settings.priceRepairMech.ToString("N0") + "kg";
+            priceSpeedIncText.text = settings.priceSpeedInc.ToString("N0") + "kg";
+            priceHeatSinkText.text = settings.priceHeatSink.ToString("N0") + "kg";
+            priceRepairRadarText.text = settings.priceRepairRadar.ToString("N0") + "kg";
+            priceRepairWTurretText.text = settings.priceRepairWTurret.ToString("N0") + "kg";
+            priceRepairETurretText.text = settings.priceRepairETurret.ToString("N0") + "kg";
 
-            priceCannonText.text = settings.priceCannon.ToString("N0");
-            priceGattlingText.text = settings.priceGattling.ToString("N0");
-            priceGaussText.text = settings.priceGauss.ToString("N0");
-            priceLaserText.text = settings.priceLaser.ToString("N0");
-            priceAutoText.text = settings.priceAutoCannon.ToString("N0");
-            priceMissilesText.text = settings.priceMissiles.ToString("N0");
+            priceCannonText.text = settings.priceCannon.ToString("N0") + "kg";
+            priceGattlingText.text = settings.priceGattling.ToString("N0") + "kg";
+            priceGaussText.text = settings.priceGauss.ToString("N0") + "kg";
+            priceLaserText.text = settings.priceLaser.ToString("N0") + "kg";
+            priceAutoText.text = settings.priceAutoCannon.ToString("N0") + "kg";
+            priceMissilesText.text = settings.priceMissiles.ToString("N0") + "kg";
         }
 
         public void PlayClickEvent()
@@ -90,55 +92,158 @@ namespace HackedDesign.UI
 
         public void RepairBaseClick()
         {
-            if (GameManager.Instance.GameData.scrap >= GameManager.Instance.GameSettings.priceBaseHeal)
+            if (CanAfford(GameManager.Instance.GameSettings.priceBaseHeal))
             {
                 GameManager.Instance.DamageBase(-1 * GameManager.Instance.GameSettings.repairBaseHealth);
-                GameManager.Instance.GameData.scrap -= GameManager.Instance.GameSettings.priceBaseHeal;
+                Buy(GameManager.Instance.GameSettings.priceBaseHeal);
             }
         }
 
         public void RepairMechClick()
         {
-            if (GameManager.Instance.GameData.scrap >= GameManager.Instance.GameSettings.priceRepairMech)
+            if (CanAfford(GameManager.Instance.GameSettings.priceRepairMech))
             {
                 GameManager.Instance.DamageArmour(-1 * GameManager.Instance.GameSettings.repairMechArmour);
-                GameManager.Instance.GameData.scrap -= GameManager.Instance.GameSettings.priceRepairMech;
+                Buy(GameManager.Instance.GameSettings.priceRepairMech);
             }
         }
 
+        public void IncMechSpeedClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceSpeedInc))
+            {
+                GameManager.Instance.IncreaseSpeed(1);
+                Buy(GameManager.Instance.GameSettings.priceSpeedInc);
+            }
+        }
+
+        public void IncHeatSinkClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceHeatSink))
+            {
+                GameManager.Instance.IncreaseHeatSink(1);
+                Buy(GameManager.Instance.GameSettings.priceHeatSink);
+            }
+        }
+
+        public void RepairRadarClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceRepairRadar))
+            {
+                GameManager.Instance.GameData.radarWorking = true;
+                Buy(GameManager.Instance.GameSettings.priceRepairRadar);
+            }
+        }
+
+        public void RepairETurretClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceRepairETurret))
+            {
+                GameManager.Instance.GameData.eturretWorking = true;
+                Buy(GameManager.Instance.GameSettings.priceRepairETurret);
+            }
+        }
+
+        public void RepairWTurretClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceRepairWTurret))
+            {
+                GameManager.Instance.GameData.wturretWorking = true;
+                Buy(GameManager.Instance.GameSettings.priceRepairWTurret);
+            }
+        }
+
+        public void UpgradeCannonClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceCannon) && GameManager.Instance.Player.Weapons.selectedWeapon != 0)
+            {
+                GameManager.Instance.Player.Weapons.UpgradeWeapon(WeaponType.Cannon);
+                Buy(GameManager.Instance.GameSettings.priceCannon);
+            }
+        }
+
+        public void UpgradeGattlingClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceGattling) && GameManager.Instance.Player.Weapons.selectedWeapon != 0)
+            {
+                GameManager.Instance.Player.Weapons.UpgradeWeapon(WeaponType.GattlingGun);
+                Buy(GameManager.Instance.GameSettings.priceGattling);
+            }
+        }
+
+        public void UpgradeGaussClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceGauss) && GameManager.Instance.Player.Weapons.selectedWeapon != 0)
+            {
+                GameManager.Instance.Player.Weapons.UpgradeWeapon(WeaponType.Gauss);
+                Buy(GameManager.Instance.GameSettings.priceGauss);
+            }
+        }
+
+        public void UpgradeLaserClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceLaser) && GameManager.Instance.Player.Weapons.selectedWeapon != 0)
+            {
+                GameManager.Instance.Player.Weapons.UpgradeWeapon(WeaponType.LaserCannon);
+                Buy(GameManager.Instance.GameSettings.priceLaser);
+            }
+        }
+
+        public void UpgradeAutoCannonClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceAutoCannon) && GameManager.Instance.Player.Weapons.selectedWeapon != 0)
+            {
+                GameManager.Instance.Player.Weapons.UpgradeWeapon(WeaponType.AutoCannon);
+                Buy(GameManager.Instance.GameSettings.priceAutoCannon);
+            }
+        }
+
+        public void UpgradeMissilesClick()
+        {
+            if (CanAfford(GameManager.Instance.GameSettings.priceMissiles) && GameManager.Instance.Player.Weapons.selectedWeapon != 0)
+            {
+                GameManager.Instance.Player.Weapons.UpgradeWeapon(WeaponType.Missiles);
+                Buy(GameManager.Instance.GameSettings.priceMissiles);
+            }
+        }        
+
         public void WeaponUnhover()
         {
-            GameManager.Instance.Weapons.SetTempWeapon(WeaponType.None);
+            GameManager.Instance.Player.Weapons.SetTempWeapon(WeaponType.None);
         }
 
         public void CannonHover()
         {
-            GameManager.Instance.Weapons.SetTempWeapon(WeaponType.Cannon);
+            GameManager.Instance.Player.Weapons.SetTempWeapon(WeaponType.Cannon);
         }
 
         public void GattlingGunHover()
         {
-            GameManager.Instance.Weapons.SetTempWeapon(WeaponType.GattlingGun);
+            GameManager.Instance.Player.Weapons.SetTempWeapon(WeaponType.GattlingGun);
         }
 
         public void GaussHover()
         {
-            GameManager.Instance.Weapons.SetTempWeapon(WeaponType.Gauss);
+            GameManager.Instance.Player.Weapons.SetTempWeapon(WeaponType.Gauss);
         }
 
         public void LaserHover()
         {
-            GameManager.Instance.Weapons.SetTempWeapon(WeaponType.LaserCannon);
+            GameManager.Instance.Player.Weapons.SetTempWeapon(WeaponType.LaserCannon);
         }
 
         public void AutocannonHover()
         {
-            GameManager.Instance.Weapons.SetTempWeapon(WeaponType.AutoCannon);
+            GameManager.Instance.Player.Weapons.SetTempWeapon(WeaponType.AutoCannon);
         }
 
         public void MissileHover()
         {
-            GameManager.Instance.Weapons.SetTempWeapon(WeaponType.Missiles);
+            GameManager.Instance.Player.Weapons.SetTempWeapon(WeaponType.Missiles);
         }
+
+        private bool CanAfford(int price) => GameManager.Instance.GameData.scrap >= price;
+        private void Buy(int price) => GameManager.Instance.GameData.scrap -= price;
+
     }
 }

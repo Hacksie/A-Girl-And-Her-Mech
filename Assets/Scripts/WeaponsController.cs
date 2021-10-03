@@ -6,82 +6,139 @@ namespace HackedDesign
 {
     public class WeaponsController : MonoBehaviour
     {
-        [SerializeField] private GameData data;
         [SerializeField] private List<Weapon> rightArm;
         [SerializeField] private List<Weapon> leftArm;
         [SerializeField] private List<Weapon> rightShoulder;
         [SerializeField] private List<Weapon> leftShoulder;
+
+        [SerializeField] public WeaponPosition selectedWeapon = 0;
+        //[SerializeField] public WeaponPosition currentWeapon;
+
+        [SerializeField] public WeaponType leftArmWeapon;
+        [SerializeField] public WeaponType rightArmWeapon;
+        [SerializeField] public WeaponType leftShoulderWeapon;
+        [SerializeField] public WeaponType rightShoulderWeapon;
+
+        [SerializeField] public WeaponType leftArmWeaponTemp;
+        [SerializeField] public WeaponType rightArmWeaponTemp;
+        [SerializeField] public WeaponType leftShoulderWeaponTemp;
+        [SerializeField] public WeaponType rightShoulderWeaponTemp;        
 
         public void Start()
         {
             UpdateWeapons();
         }
 
-        public void FireCurrentWeapon()
+        public bool FireCurrentWeapon()
         {
-            GetCurrentWeapon().Fire();
+            var currentWeapon = GetCurrentWeapon();
+            return currentWeapon ? currentWeapon.type != WeaponType.None && currentWeapon.Fire() : false;
+        }
+
+        public void FireAllWeapons()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                GetWeapon((WeaponPosition)i)?.Fire();
+            }
+        }
+
+        public void NextWeapon()
+        {
+            selectedWeapon++;
+
+            if (selectedWeapon > WeaponPosition.LeftShoulder)
+            {
+                selectedWeapon = WeaponPosition.RightArm;
+            }
+        }
+
+        public void PrevWeapon()
+        {
+            selectedWeapon--;
+
+            if (selectedWeapon < 0)
+            {
+                selectedWeapon = WeaponPosition.LeftShoulder;
+            }
         }
 
         public Weapon GetCurrentWeapon()
         {
             Weapon weapon;
-            switch (data.selectedWeapon)
+            switch (selectedWeapon)
             {
-                case 3:
-                    weapon = leftShoulder.FirstOrDefault(w => w.type == data.leftShoulderWeapon);
+                case WeaponPosition.LeftShoulder:
+                    weapon = leftShoulder.FirstOrDefault(w => w.type == leftShoulderWeapon);
                     break;
-                case 2:
-                    weapon = rightShoulder.FirstOrDefault(w => w.type == data.rightShoulderWeapon);
+                case WeaponPosition.RightShoulder:
+                    weapon = rightShoulder.FirstOrDefault(w => w.type == rightShoulderWeapon);
                     break;
-                case 1:
-                    weapon = leftArm.FirstOrDefault(w => w.type == data.leftArmWeapon);
+                case WeaponPosition.LeftArm:
+                    weapon = leftArm.FirstOrDefault(w => w.type == leftArmWeapon);
                     break;
-                case 0:
+                case WeaponPosition.RightArm:
                 default:
-                    weapon = rightArm.FirstOrDefault(w => w.type == data.rightArmWeapon);
+                    weapon = rightArm.FirstOrDefault(w => w.type == rightArmWeapon);
                     break;
             }
 
             return weapon;
         }
 
-        public Weapon GetWeapon(int position)
+        public Weapon GetWeapon(WeaponPosition position)
         {
-            switch(position)
+            switch (position)
             {
-                case 3:
-                    return leftShoulder.FirstOrDefault(w => w.type == data.leftShoulderWeapon);
-                case 2:
-                    return rightShoulder.FirstOrDefault(w => w.type == data.rightShoulderWeapon); 
-                case 1:
-                    return leftArm.FirstOrDefault(w => w.type == data.leftArmWeapon);
+                case WeaponPosition.LeftShoulder:
+                    return leftShoulder.FirstOrDefault(w => w.type == leftShoulderWeapon);
+                case WeaponPosition.RightShoulder:
+                    return rightShoulder.FirstOrDefault(w => w.type == rightShoulderWeapon);
+                case WeaponPosition.LeftArm:
+                    return leftArm.FirstOrDefault(w => w.type == leftArmWeapon);
                 default:
-                case 0:
-                    return rightArm.FirstOrDefault(w => w.type == data.rightArmWeapon);
+                case WeaponPosition.RightArm:
+                    return rightArm.FirstOrDefault(w => w.type == rightArmWeapon);
             }
 
         }
 
+        public void UpgradeWeapon(WeaponType newWeapon)
+        {
+            switch (selectedWeapon)
+            {
+                case WeaponPosition.LeftArm:
+                    leftArmWeapon = newWeapon;
+                    break;
+                case WeaponPosition.RightShoulder:
+                    rightShoulderWeapon = newWeapon;
+                    break;
+                case WeaponPosition.LeftShoulder:
+                    leftShoulderWeapon = newWeapon;
+                    break;
+            }
+        }        
+
         public void ClearTempWeapons()
         {
-            data.leftShoulderWeaponTemp = WeaponType.None;
-            data.rightShoulderWeaponTemp = WeaponType.None;
-            data.leftArmWeaponTemp = WeaponType.None;
+            leftShoulderWeaponTemp = WeaponType.None;
+            rightShoulderWeaponTemp = WeaponType.None;
+            leftArmWeaponTemp = WeaponType.None;
             UpdateWeapons();
         }
 
         public void SetTempWeapon(WeaponType type)
         {
-            switch (data.selectedWeapon)
+            switch (selectedWeapon)
             {
-                case 3:
-                    data.leftShoulderWeaponTemp = type;
+                case WeaponPosition.LeftShoulder:
+                    leftShoulderWeaponTemp = type;
                     break;
-                case 2:
-                    data.rightShoulderWeaponTemp = type;
+                case WeaponPosition.RightShoulder:
+                    rightShoulderWeaponTemp = type;
                     break;
-                case 1:
-                    data.leftArmWeaponTemp = type;
+                case WeaponPosition.LeftArm:
+                    leftArmWeaponTemp = type;
                     break;
             }
 
@@ -90,34 +147,22 @@ namespace HackedDesign
 
         public void UpdateWeapons()
         {
-            leftArm.ForEach((weapon) => { weapon.gameObject.SetActive(data.leftArmWeaponTemp != WeaponType.None ? weapon.type == data.leftArmWeaponTemp : weapon.type == data.leftArmWeapon); });
-            rightArm.ForEach((weapon) => { weapon.gameObject.SetActive(weapon.type == data.rightArmWeapon); });
-            leftShoulder.ForEach((weapon) => { weapon.gameObject.SetActive(data.leftShoulderWeaponTemp != WeaponType.None ? weapon.type == data.leftShoulderWeaponTemp : weapon.type == data.leftShoulderWeapon); });
-            rightShoulder.ForEach((weapon) => { weapon.gameObject.SetActive(data.rightShoulderWeaponTemp != WeaponType.None ? weapon.type == data.rightShoulderWeaponTemp : weapon.type == data.rightShoulderWeapon); });
-            /*
-            leftArmNone.SetActive(data.leftArmWeapon == WeaponType.None);
-            leftArmCannon.SetActive(data.leftArmWeapon == WeaponType.Cannon);
-            leftArmGattling.SetActive(data.leftArmWeapon == WeaponType.GattlingGun);
-            leftArmPlasma.SetActive(data.leftArmWeapon == WeaponType.Gauss);
-            leftArmLaser.SetActive(data.leftArmWeapon == WeaponType.LaserCannon);
-            leftAutocannon.SetActive(data.leftArmWeapon == WeaponType.AutoCannon);
-
-            leftShoulderNone.SetActive(data.leftShoulderWeapon == WeaponType.None);
-            leftShoulderCannon.SetActive(data.leftShoulderWeapon == WeaponType.Cannon);
-            leftShoulderGattling.SetActive(data.leftShoulderWeapon == WeaponType.GattlingGun);
-            leftShoulderPlasma.SetActive(data.leftShoulderWeapon == WeaponType.Gauss);
-            leftShoulderLaser.SetActive(data.leftShoulderWeapon == WeaponType.LaserCannon);
-            leftShoulderAutocannon.SetActive(data.leftShoulderWeapon == WeaponType.AutoCannon);            
-            leftShoulderMissiles.SetActive(data.leftShoulderWeapon == WeaponType.Missiles);            
-
-            rightShoulderNone.SetActive(data.rightShoulderWeapon == WeaponType.None);
-            rightShoulderCannon.SetActive(data.rightShoulderWeapon == WeaponType.Cannon);
-            rightShoulderGattling.SetActive(data.rightShoulderWeapon == WeaponType.GattlingGun);
-            rightShoulderPlasma.SetActive(data.rightShoulderWeapon == WeaponType.Gauss);
-            rightShoulderLaser.SetActive(data.rightShoulderWeapon == WeaponType.LaserCannon);
-            rightShoulderAutocannon.SetActive(data.rightShoulderWeapon == WeaponType.AutoCannon);            
-            rightShoulderMissiles.SetActive(data.rightShoulderWeapon == WeaponType.Missiles);
-            */
+            if (leftArm != null && leftArm.Count > 0)
+            {
+                leftArm.ForEach((weapon) => { weapon.gameObject.SetActive(leftArmWeaponTemp != WeaponType.None ? weapon.type == leftArmWeaponTemp : weapon.type == leftArmWeapon); });
+            }
+            if (rightArm != null && rightArm.Count > 0)
+            {
+                rightArm.ForEach((weapon) => { weapon.gameObject.SetActive(weapon.type == rightArmWeapon); });
+            }
+            if (leftShoulder != null && leftShoulder.Count > 0)
+            {
+                leftShoulder.ForEach((weapon) => { weapon.gameObject.SetActive(leftShoulderWeaponTemp != WeaponType.None ? weapon.type == leftShoulderWeaponTemp : weapon.type == leftShoulderWeapon); });
+            }
+            if (rightShoulder != null && rightShoulder.Count > 0)
+            {
+                rightShoulder.ForEach((weapon) => { weapon.gameObject.SetActive(rightShoulderWeaponTemp != WeaponType.None ? weapon.type == rightShoulderWeaponTemp : weapon.type == rightShoulderWeapon); });
+            }
         }
     }
 }

@@ -9,45 +9,39 @@ namespace HackedDesign
     public class Enemy : MonoBehaviour
     {
         [SerializeField] public EnemyTypes type;
+        //[SerializeField] public GameData data;
         [SerializeField] public float health;
         [SerializeField] private NavMeshAgent agent;
-        [SerializeField] private List<Weapon> weapons;
+        //[SerializeField] private List<Weapon> weapons;
         [SerializeField] private Transform turret;
         [SerializeField] private float rotateSpeed = 60;
         [SerializeField] private float attackRange = 20;
-        [SerializeField] private List<Weapon> raWeapons;
-        [SerializeField] private List<Weapon> laWeapons;
-        [SerializeField] private List<Weapon> rsWeapons;
-        [SerializeField] private List<Weapon> lsWeapons;
-
+        [SerializeField] private Transform healthBar;
 
         private Animator animator;
 
-        private List<int> selectedWeapons = new List<int>();
-        private int selectedWeapon = 0;
+        private WeaponsController weapons;
         private float nextBehaviourShift = 0;
+        private float nextWeaponShift = 0;
         private Vector3 target;
+        private float currentHealth;
 
         void Awake()
         {
             agent = GetComponent<NavMeshAgent>();
             animator = GetComponent<Animator>();
+            weapons = GetComponent<WeaponsController>();
         }
 
         public void Spawn()
         {
             agent.SetDestination(Vector3.zero);
-
-            SelectWeapon();
-        }
-
-        private void SelectWeapon()
-        {
-            selectedWeapon = Random.Range(0, weapons.Count);
-            for (int i = 0; i < weapons.Count; i++)
-            {
-                weapons[i].gameObject.SetActive(i == selectedWeapon);
-            }
+            weapons.rightArmWeapon = GameManager.Instance.GameSettings.armWeapons[type][Random.Range(0, GameManager.Instance.GameSettings.armWeapons[type].Length)];
+            weapons.leftArmWeapon = GameManager.Instance.GameSettings.armWeapons[type][Random.Range(0, GameManager.Instance.GameSettings.armWeapons[type].Length)];
+            weapons.rightShoulderWeapon = GameManager.Instance.GameSettings.shoulderWeapons[type][Random.Range(0, GameManager.Instance.GameSettings.shoulderWeapons[type].Length)];
+            weapons.leftShoulderWeapon = GameManager.Instance.GameSettings.shoulderWeapons[type][Random.Range(0, GameManager.Instance.GameSettings.shoulderWeapons[type].Length)];
+            currentHealth = health;
+            weapons.UpdateWeapons();
         }
 
         public void UpdateBehaviour()
@@ -65,14 +59,20 @@ namespace HackedDesign
                     agent.SetDestination(new Vector3(dest.x, 0, dest.y));
                 }
 
-                agent.isStopped = playerDistance < baseDistance || CheckInRange();
+                //agent.isStopped = playerDistance < baseDistance || CheckInRange();
 
                 UpdateTurret(playerDistance < baseDistance ? GameManager.Instance.Player.transform.position : Vector3.zero);
 
                 if (playerDistance < baseDistance ? (playerDistance < attackSqr) : (baseDistance < attackSqr))
                 {
-                    weapons[selectedWeapon].Fire();
+                    weapons.FireCurrentWeapon();
+                    if (Time.time > nextWeaponShift)
+                    {
+                        nextWeaponShift = Time.time + GameManager.Instance.GameSettings.enemySwitchWeapon;
+                        weapons.NextWeapon();
+                    }
                 }
+                UpdateHealthBar();
 
                 Animate();
             }
@@ -92,14 +92,22 @@ namespace HackedDesign
 
         public void Damage(float amount)
         {
-            health -= amount;
+            currentHealth -= amount;
 
-            if (health <= 0)
+            if (currentHealth <= 0)
             {
                 Debug.Log("Enemy destroyed");
                 Explode();
+            }
+        }
 
-                //Destroy(gameObject);
+        private void UpdateHealthBar()
+        {
+            var scale = healthBar.localScale;
+            scale.x = currentHealth / health;
+            if (healthBar != null)
+            {
+                healthBar.localScale = scale;
             }
         }
 

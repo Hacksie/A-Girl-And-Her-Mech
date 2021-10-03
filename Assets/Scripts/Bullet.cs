@@ -40,14 +40,22 @@ namespace HackedDesign
             {
                 if (other != null && other.CompareTag("Enemy"))
                 {
-                    var e = other.GetComponent<Enemy>();
-                    e.Damage(this.damage);
+                    var e = other.GetComponentInParent<Enemy>();
+                    if (e != null)
+                    {
+                        e.Damage(this.damage);
+                    }
+                    else
+                    {
+                        Debug.LogError("untagged enemy error");
+                    }
+
                 }
-                if (other != null && other.CompareTag("Player") && !this.firer.CompareTag("Player"))
+                if (other != null && this.firer != null && other.CompareTag("Player") && !this.firer.CompareTag("Player"))
                 {
                     GameManager.Instance.DamageArmour(damage);
                 }
-                if (other != null && other.CompareTag("Base") && !this.firer.CompareTag("Player"))
+                if (other.gameObject != null && this.firer.gameObject != null && other.CompareTag("Base") && !this.firer.CompareTag("Player"))
                 {
                     GameManager.Instance.DamageBase(damage);
                 }
@@ -73,9 +81,6 @@ namespace HackedDesign
                 {
                     GameManager.Instance.DamageArmour(damage);
                 }
-                //Debug.Log("Explode");
-
-
                 Explode(this.transform.position);
             }
         }

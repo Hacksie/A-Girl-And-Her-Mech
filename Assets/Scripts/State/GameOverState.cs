@@ -14,6 +14,7 @@ namespace HackedDesign
 
         public void Begin()
         {
+            GameManager.Instance.CameraShake.Shake(0,0);
             GameManager.Instance.Enemies.Reset();
             this.gameoverPanel.Show();
         }

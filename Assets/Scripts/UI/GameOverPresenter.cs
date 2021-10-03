@@ -10,6 +10,7 @@ namespace HackedDesign.UI
 
         public void QuitClickEvent()
         {
+            
             GameManager.Instance.SetMainMenu();
         }
     }

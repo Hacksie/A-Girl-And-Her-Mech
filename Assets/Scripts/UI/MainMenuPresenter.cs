@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace HackedDesign.UI
 {
@@ -6,6 +7,9 @@ namespace HackedDesign.UI
     {
         public GameObject optionsPanel;
         public GameObject creditsPanel;
+        [SerializeField] private UnityEngine.UI.Slider masterSlider;
+        [SerializeField] private UnityEngine.UI.Slider sfxSlider;
+        [SerializeField] private UnityEngine.UI.Slider musicSlider;
 
         public override void Repaint()
         {
@@ -50,6 +54,21 @@ namespace HackedDesign.UI
         {
             GameManager.Instance.Quit();
         }
+
+        public void OnMasterChangedEvent(float sliderValue)
+        {
+            AudioManager.Instance.SetMasterVolume(sliderValue);
+        }
+
+        public void OnSFXChangedEvent(float sliderValue)
+        {
+            AudioManager.Instance.SetSFXVolume(sliderValue);
+        }        
+
+        public void OnMusicChangedEvent(float sliderValue)
+        {
+            AudioManager.Instance.SetMusicVolume(sliderValue);
+        }        
 
     }
 

@@ -785,6 +785,7 @@ MonoBehaviour:
   damage: 2
   heat: 5
   sprite: {fileID: 0}
+  isPlayer: 0
 --- !u!1 &2130021163896790111
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,6 +927,7 @@ MonoBehaviour:
   damage: 10
   heat: 5
   sprite: {fileID: 0}
+  isPlayer: 0
 --- !u!1 &2526800982457161676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1939,6 +1941,7 @@ MonoBehaviour:
   damage: 10
   heat: 44
   sprite: {fileID: 0}
+  isPlayer: 0
 --- !u!1 &2978657799625806873
 GameObject:
   m_ObjectHideFlags: 0
@@ -4944,7 +4947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  health: 100
+  health: 120
   agent: {fileID: 0}
   weapons:
   - {fileID: 5996013099141879744}
@@ -7380,3 +7383,4 @@ MonoBehaviour:
   damage: 5
   heat: 10
   sprite: {fileID: 0}
+  isPlayer: 0

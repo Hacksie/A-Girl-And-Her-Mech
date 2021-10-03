@@ -45,6 +45,7 @@ namespace HackedDesign
             }
 
             positions.Add(transform.position + (transform.forward * distance));
+            GameManager.Instance.EntityPool.SpawnMiniExplosion(transform.position + (transform.forward * distance));
             var array = positions.ToArray();
             line.positionCount = array.Length; 
             line.SetPositions(array);

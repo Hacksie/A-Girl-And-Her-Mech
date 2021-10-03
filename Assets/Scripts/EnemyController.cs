@@ -8,10 +8,9 @@ namespace HackedDesign
     {
         [SerializeField] public Transform parent;
         public List<Enemy> enemyPrefabs = new List<Enemy>();
-        public List<Enemy> currentEnemies = new List<Enemy>();
         public List<DestroyedEnemy> destroyedEnemies = new List<DestroyedEnemy>();
-
-
+        public List<Enemy> currentEnemies = new List<Enemy>();
+        
         void Awake()
         {
             if (!parent)
@@ -24,8 +23,11 @@ namespace HackedDesign
         {
             for (int i = 0; i < parent.transform.childCount; i++)
             {
+                parent.transform.GetChild(i).gameObject.SetActive(false);
                 Destroy(parent.transform.GetChild(i).gameObject);
             }
+
+            currentEnemies.Clear();
         }
 
         public void SpawnDestroyedEnemy(Enemy enemy)
@@ -55,10 +57,9 @@ namespace HackedDesign
             }
         }
 
-        public void UpdateBehaviour()
-        {
+        public void UpdateBehaviour() => 
             currentEnemies.ForEach((e) => { if (e.gameObject.activeInHierarchy) e.UpdateBehaviour(); });
-        }
+        
 
         private void UpdateIncoming()
         {
@@ -77,24 +78,18 @@ namespace HackedDesign
 
         private void UpdateAttacking()
         {
-            var data = GameManager.Instance.GameData;
             // Check all enemies are dead
             if (currentEnemies.All(e => !e.gameObject.activeInHierarchy))
             {
-                data.waveState = WaveState.Intermission;
+                GameManager.Instance.GameData.waveState = WaveState.Intermission;
             }
         }
 
         private void SpawnWave()
         {
-            foreach (Enemy e in currentEnemies)
-            {
-                Destroy(e);
-            }
-
+            currentEnemies.ForEach(e => Destroy(e));
             currentEnemies.Clear();
 
-            Debug.Log("Spawn attackers");
             var attackers = CalcAttackers();
 
             for (int i = 0; i < attackers.Length; i++)
@@ -109,13 +104,7 @@ namespace HackedDesign
                     e.Spawn();
                     currentEnemies.Add(e);
                 }
-
             }
-
-
-            //Debug.Log(string.Concat<int>(attackers.ToList()));
-
-
         }
 
         private int[] CalcAttackers()
@@ -136,23 +125,19 @@ namespace HackedDesign
                 remaining -= calc;
             }
 
-
             return results;
         }
 
         private void UpdateIntermission()
         {
             var data = GameManager.Instance.GameData;
-            var settings = GameManager.Instance.GameSettings;
-
             data.intermissionTimer -= Time.deltaTime;
 
             if (data.intermissionTimer <= 0)
             {
-                data.intermissionTimer = settings.intermissionTimer;
+                data.intermissionTimer = GameManager.Instance.GameSettings.intermissionTimer;
                 data.waveState = WaveState.Incoming;
                 data.wave++;
-                Debug.Log("Next wave:" + data.wave);
             }
         }
     }

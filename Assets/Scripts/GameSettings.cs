@@ -14,7 +14,6 @@ namespace HackedDesign
         public int maxBonusWalkSpeed = 5;
         public int maxBonusHeatSink = 5;
 
-        
         public float maxBaseHealth = 1000.0f;
 
         public float maxHeat = 100.0f;
@@ -25,7 +24,7 @@ namespace HackedDesign
         public float heatDamage = 3.0f;
         public float coolantDump = 25.0f;
 
-        public float interWaveTimer = 15.0f;
+        //public float interWaveTimer = 15.0f;
 
         public int repairBaseHealth = 100;
         public int repairMechArmour = 10;
@@ -45,9 +44,6 @@ namespace HackedDesign
         public int priceAutoCannon = 2500;
         public int priceMissiles = 4000;
 
-        public int priceBulletAmmo = 10;
-        public int priceMissileAmmo = 100;
-
         public float incomingTimer = 5.0f;
         public float intermissionTimer = 15.0f;
 
@@ -59,8 +55,26 @@ namespace HackedDesign
         public float baseExplosionRadius = 6.0f;
         public float behaviourShiftTime = 15.0f;
 
-        public Vector3 startPosition = new Vector3(-5,0,0);
+        public float shootIntensity = 1.0f;
+        public float hitIntensity = 1.0f;
 
-        public List<Wave> waves;
+        public float clawRange = 0.7f;
+        public float enemySwitchWeapon = 0.33f;
+
+        public Vector3 startPosition = new Vector3(0,0,0);
+
+        public Dictionary<EnemyTypes, WeaponType[]> armWeapons = new Dictionary<EnemyTypes, WeaponType[]>()
+            {
+                { EnemyTypes.LightMech, new WeaponType[] { WeaponType.Cannon, WeaponType.GattlingGun } },
+                { EnemyTypes.MediumMech, new WeaponType[] { WeaponType.Cannon, WeaponType.Gauss, WeaponType.GattlingGun, WeaponType.LaserCannon } },
+                { EnemyTypes.HeavyMech, new WeaponType[] { WeaponType.Gauss, WeaponType.LaserCannon, WeaponType.AutoCannon } },
+            };
+
+        public Dictionary<EnemyTypes, WeaponType[]> shoulderWeapons = new Dictionary<EnemyTypes, WeaponType[]>()
+            {
+                { EnemyTypes.LightMech, new WeaponType[] { WeaponType.None, WeaponType.Cannon} },
+                { EnemyTypes.MediumMech, new WeaponType[] { WeaponType.None, WeaponType.Gauss, WeaponType.Missiles } },
+                { EnemyTypes.HeavyMech, new WeaponType[] { WeaponType.None, WeaponType.LaserCannon, WeaponType.AutoCannon, WeaponType.Missiles } },
+            };            
     }
 }
