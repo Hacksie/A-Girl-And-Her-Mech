@@ -61,20 +61,25 @@ namespace HackedDesign
         public float clawRange = 0.7f;
         public float enemySwitchWeapon = 0.33f;
 
+        public float healthWarnAmount = 33f;
+        public float healthDangerAmount = 10f;
+        public float heatWarnAmount = 66f;
+        public float heatDangerAmount = 90f;
+
         public Vector3 startPosition = new Vector3(0,0,0);
 
         public Dictionary<EnemyTypes, WeaponType[]> armWeapons = new Dictionary<EnemyTypes, WeaponType[]>()
             {
-                { EnemyTypes.LightMech, new WeaponType[] { WeaponType.Cannon, WeaponType.GattlingGun } },
+                { EnemyTypes.LightMech, new WeaponType[] { WeaponType.Cannon, WeaponType.GattlingGun, WeaponType.Gauss } },
                 { EnemyTypes.MediumMech, new WeaponType[] { WeaponType.Cannon, WeaponType.Gauss, WeaponType.GattlingGun, WeaponType.LaserCannon } },
-                { EnemyTypes.HeavyMech, new WeaponType[] { WeaponType.Gauss, WeaponType.LaserCannon, WeaponType.AutoCannon } },
+                { EnemyTypes.HeavyMech, new WeaponType[] { WeaponType.Cannon, WeaponType.Gauss, WeaponType.LaserCannon, WeaponType.AutoCannon } },
             };
 
         public Dictionary<EnemyTypes, WeaponType[]> shoulderWeapons = new Dictionary<EnemyTypes, WeaponType[]>()
             {
                 { EnemyTypes.LightMech, new WeaponType[] { WeaponType.None, WeaponType.Cannon} },
-                { EnemyTypes.MediumMech, new WeaponType[] { WeaponType.None, WeaponType.Gauss, WeaponType.Missiles } },
-                { EnemyTypes.HeavyMech, new WeaponType[] { WeaponType.None, WeaponType.LaserCannon, WeaponType.AutoCannon, WeaponType.Missiles } },
+                { EnemyTypes.MediumMech, new WeaponType[] { WeaponType.None, WeaponType.Cannon, WeaponType.Gauss, WeaponType.Missiles } },
+                { EnemyTypes.HeavyMech, new WeaponType[] { WeaponType.None, WeaponType.Cannon, WeaponType.LaserCannon, WeaponType.AutoCannon, WeaponType.Missiles } },
             };            
     }
 }

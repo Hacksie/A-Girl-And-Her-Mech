@@ -16,11 +16,13 @@ namespace HackedDesign
         {
             GameManager.Instance.CameraShake.Shake(0,0);
             this.pausePanel.Show();
+            Debug.Log("Start pause");
         }
 
         public void End()
         {
             this.pausePanel.Hide();
+            Debug.Log("End Pause");
         }
 
         public void FixedUpdate()

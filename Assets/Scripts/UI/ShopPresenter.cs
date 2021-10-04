@@ -46,24 +46,24 @@ namespace HackedDesign.UI
         {
             var data = GameManager.Instance.GameData;
             var settings = GameManager.Instance.GameSettings;
-            radarButton.interactable = !data.radarWorking;
-            turretWButton.interactable = !data.wturretWorking;
-            turretEButton.interactable = !data.eturretWorking;
+            radarButton.interactable = !data.radarWorking && data.scrap >= settings.priceRepairRadar;
+            turretWButton.interactable = !data.wturretWorking && data.scrap >= settings.priceRepairWTurret;
+            turretEButton.interactable = !data.eturretWorking && data.scrap >= settings.priceRepairETurret;
 
-            walkSpeedButton.interactable = data.bonusWalkSpeed < settings.maxBonusWalkSpeed;
-            heatSinkButton.interactable = data.bonusHeatSink < settings.maxBonusHeatSink;
-            mechButton.interactable = data.armour < settings.maxArmour;
-            baseButton.interactable = data.baseHealth < settings.maxBaseHealth;
+            walkSpeedButton.interactable = data.bonusWalkSpeed < settings.maxBonusWalkSpeed && data.scrap >= settings.priceSpeedInc;
+            heatSinkButton.interactable = data.bonusHeatSink < settings.maxBonusHeatSink && data.scrap >= settings.priceHeatSink;
+            mechButton.interactable = data.armour < settings.maxArmour && data.scrap >= settings.priceRepairMech;
+            baseButton.interactable = data.baseHealth < settings.maxBaseHealth && data.scrap >= settings.priceBaseHeal;
 
             var currentWeapon = GameManager.Instance.Player.Weapons.GetCurrentWeapon();
 
-            cannonButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.Cannon;
-            gattlingButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.GattlingGun;
-            gaussButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.Gauss;
-            laserButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.LaserCannon;
-            autoButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.AutoCannon;
-            missileButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.RightShoulder && currentWeapon.type != WeaponType.Missiles;
-            ammoButton.interactable = currentWeapon.ammoType == AmmoType.Bullet || currentWeapon.ammoType == AmmoType.Missile;
+            cannonButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.Cannon && data.scrap >= settings.priceCannon;
+            gattlingButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.GattlingGun && data.scrap >= settings.priceGattling;
+            gaussButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.Gauss && data.scrap >= settings.priceGauss;
+            laserButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.LaserCannon && data.scrap >= settings.priceLaser;
+            autoButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.LeftArm && currentWeapon.type != WeaponType.AutoCannon && data.scrap >= settings.priceAutoCannon;
+            missileButton.interactable = GameManager.Instance.Player.Weapons.selectedWeapon >= WeaponPosition.RightShoulder && currentWeapon.type != WeaponType.Missiles && data.scrap >= settings.priceMissiles;
+            //ammoButton.interactable = currentWeapon.ammoType == AmmoType.Bullet || currentWeapon.ammoType == AmmoType.Missile;
         }
 
         private void UpdatePrices()

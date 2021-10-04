@@ -16,7 +16,6 @@ namespace HackedDesign
         [SerializeField] ParticleSystem explosionPrefab = null;
         [SerializeField] ParticleSystem miniExplosionPrefab = null;
 
-
         private List<Bullet> bulletPool = new List<Bullet>();
         private List<Bullet> gaussPool = new List<Bullet>();
         private List<Bullet> missilePool = new List<Bullet>();
@@ -125,6 +124,7 @@ namespace HackedDesign
         public void FireMissile(GameObject firer, Vector3 start, Vector3 forward, float damage)
         {
             Bullet bullet = missilePool.FirstOrDefault(b => !b.gameObject.activeInHierarchy);
+            Debug.Log("Fire missile pool");
 
             if (bullet == null)
             {

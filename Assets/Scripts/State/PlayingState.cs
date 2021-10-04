@@ -38,10 +38,8 @@ namespace HackedDesign
             this.intermissionPanel.Hide();
             this.incomingPanel.Hide();
             this.player.Freeze();
+            this.enemies.FreezeAll();
             GameManager.Instance.CameraShake.Shake(0, 0);
-            AudioManager.Instance.StopIncomingMusic();
-            AudioManager.Instance.StopAttackMusic();
-            AudioManager.Instance.StopIntermissionMusic();
         }
 
         public void Update()
@@ -73,34 +71,79 @@ namespace HackedDesign
 
         private void UpdateWave()
         {
-            this.enemies.UpdateWave();
-
             switch (GameManager.Instance.GameData.waveState)
             {
                 default:
                 case WaveState.Incoming:
-                    this.intermissionPanel.Hide();
-                    this.incomingPanel.Show();
-                    this.incomingPanel.Repaint();
-                    AudioManager.Instance.PlayIncomingMusic();
-                    AudioManager.Instance.StopIntermissionMusic();
-
-
+                    UpdateIncoming();
                     break;
+
                 case WaveState.Attacking:
-                    AudioManager.Instance.StopIncomingMusic();
-                    AudioManager.Instance.PlayAttackMusic();
-                    this.intermissionPanel.Hide();
-                    this.incomingPanel.Hide();
+                    UpdateAttacking();
+                    break;
 
-                    break;
                 case WaveState.Intermission:
-                    AudioManager.Instance.StopAttackMusic();
-                    AudioManager.Instance.PlayIntermissionMusic();
-                    this.incomingPanel.Hide();
-                    this.intermissionPanel.Show();
-                    this.intermissionPanel.Repaint();
+                    UpdateIntermission();
                     break;
+            }
+        }
+
+
+        private void UpdateIncoming()
+        {
+
+            var data = GameManager.Instance.GameData;
+            var settings = GameManager.Instance.GameSettings;
+
+            this.intermissionPanel.Hide();
+            this.incomingPanel.Show();
+            this.incomingPanel.Repaint();
+            AudioManager.Instance.PlayIncomingMusic();
+            AudioManager.Instance.StopIntermissionMusic();
+
+
+            data.incomingTimer -= Time.deltaTime;
+
+            if (data.incomingTimer <= 0)
+            {
+                data.incomingTimer = settings.incomingTimer;
+                data.waveState = WaveState.Attacking;
+                this.enemies.SpawnWave();
+            }
+        }
+
+        private void UpdateAttacking()
+        {
+
+            AudioManager.Instance.StopIncomingMusic();
+            AudioManager.Instance.PlayAttackMusic();
+            this.intermissionPanel.Hide();
+            this.incomingPanel.Hide();
+
+            // Check all enemies are dead
+            if (this.enemies.AllEnemiesAreDead())
+            {
+                GameManager.Instance.GameData.waveState = WaveState.Intermission;
+            }
+        }
+
+        private void UpdateIntermission()
+        {
+            var data = GameManager.Instance.GameData;
+
+            AudioManager.Instance.StopAttackMusic();
+            AudioManager.Instance.PlayIntermissionMusic();
+            this.incomingPanel.Hide();
+            this.intermissionPanel.Show();
+            this.intermissionPanel.Repaint();
+
+            data.intermissionTimer -= Time.deltaTime;
+
+            if (data.intermissionTimer <= 0)
+            {
+                data.intermissionTimer = GameManager.Instance.GameSettings.intermissionTimer;
+                data.waveState = WaveState.Incoming;
+                GameManager.Instance.IncreaseWave();
             }
         }
 

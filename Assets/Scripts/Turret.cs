@@ -43,6 +43,8 @@ namespace HackedDesign
                 var lookRotation = Quaternion.LookRotation(target.transform.position - turret.transform.position, Vector3.up);
                 turret.transform.rotation = Quaternion.Euler(transform.eulerAngles.x, lookRotation.eulerAngles.y , transform.eulerAngles.z);
 
+                Debug.Log("Turret firing");
+
                 weapons?.FireCurrentWeapon();
             }
         }

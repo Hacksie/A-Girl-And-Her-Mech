@@ -26,6 +26,7 @@ namespace HackedDesign
         [SerializeField] private UI.IncomingPresenter incomingPanel = null;
         [SerializeField] private UI.IntermissionPresenter intermissionPanel = null;
         [SerializeField] private UI.GameOverPresenter gameOverPanel = null;
+        [SerializeField] private UI.GameOverPresenter successPanel = null;
         [SerializeField] private UI.PausePresenter pausePanel = null;
         //[SerializeField] private GameObject menuLight = null;
 
@@ -60,6 +61,7 @@ namespace HackedDesign
         public CameraShake CameraShake { get { return cameraShake; } private set { cameraShake = value; }}
 
         public static GameManager Instance { get; private set; }
+        public Camera MainCamera { get => mainCamera; private set => mainCamera = value; }
 
         GameManager()
         {
@@ -71,6 +73,7 @@ namespace HackedDesign
 
         void Start()
         {
+            PlayerPreferences.Instance.Load();
             HideAllUI();
             SetMainMenu();
         }
@@ -81,6 +84,7 @@ namespace HackedDesign
         public void SetShop() => State = new ShopState(this.mainCamera, this.shopCameras, this.hudPanel, this.shopPanel);
         public void SetDead() => State = new DeadState(this.gameOverPanel);
         public void SetGameOver() => State = new GameOverState(this.gameOverPanel);
+        public void SetSuccess() => State = new SuccessState(this.successPanel);
         public void SetPaused() => State = new PauseState(this.pausePanel);
 
         public void Quit()
@@ -121,11 +125,6 @@ namespace HackedDesign
         public void IncreaseHeat(float amount)
         {
             GameData.heat = Mathf.Max(0, GameData.heat + amount);
-
-            // if(heat >= 100)
-            // {
-            //     // Play overload effect
-            // }
         }
 
 
@@ -172,6 +171,15 @@ namespace HackedDesign
             }
         }
 
+        public void IncreaseWave()
+        {
+            GameData.wave++;
+            if(!PlayerPreferences.Instance.infiniteWaves && GameData.wave > GameSettings.totalWaves)
+            {
+                SetSuccess();
+            }
+        }
+
         private void HideAllUI()
         {
             this.menuPanel.Hide();
@@ -182,6 +190,7 @@ namespace HackedDesign
             this.intermissionPanel.Hide();
             this.gameOverPanel.Hide();
             this.pausePanel.Hide();
+            this.successPanel.Hide();
         }
 
     }

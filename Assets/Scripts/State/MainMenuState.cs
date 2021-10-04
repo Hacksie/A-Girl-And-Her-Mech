@@ -25,6 +25,9 @@ namespace HackedDesign
             this.menuCamera.gameObject.SetActive(true);
             this.mainCamera.gameObject.SetActive(false);
             this.menuPanel.Show();
+            AudioManager.Instance.StopIncomingMusic();
+            AudioManager.Instance.StopAttackMusic();
+            AudioManager.Instance.StopIntermissionMusic();            
             AudioManager.Instance.PlayMenuMusic();
             
         }

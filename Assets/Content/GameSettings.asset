@@ -25,13 +25,12 @@ MonoBehaviour:
   ambientHeatLoss: 1
   heatDamage: 3
   coolantDump: 25
-  interWaveTimer: 15
   repairBaseHealth: 100
   repairMechArmour: 10
-  priceBaseHeal: 75
+  priceBaseHeal: 100
   priceRepairMech: 22
-  priceSpeedInc: 1000
-  priceHeatSink: 333
+  priceSpeedInc: 750
+  priceHeatSink: 750
   priceRepairRadar: 750
   priceRepairWTurret: 10000
   priceRepairETurret: 10000
@@ -52,6 +51,9 @@ MonoBehaviour:
   shootIntensity: 1
   hitIntensity: 1
   clawRange: 0.7
-  startPosition: {x: 0, y: 0, z: -0.5}
-  waves:
-  - {fileID: 11400000, guid: bc18c6c3e831cdc44875fd0b733fc769, type: 2}
+  enemySwitchWeapon: 0.33
+  healthWarnAmount: 33
+  healthDangerAmount: 10
+  heatWarnAmount: 66
+  heatDangerAmount: 90
+  startPosition: {x: -3.5, y: 0, z: -0.5}

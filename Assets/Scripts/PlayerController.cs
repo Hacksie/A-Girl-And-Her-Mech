@@ -24,11 +24,12 @@ namespace HackedDesign
         [SerializeField] private LayerMask aimMask;
         [SerializeField] private LayerMask crosshairMask;
 
-
         private Vector2 mousePosition;
         private Vector2 movement;
         private float orbit;
         private bool isFiring = false;
+
+        private RaycastHit[] raycastHits = new RaycastHit[1];
 
 
         private Animator animator;
@@ -80,29 +81,13 @@ namespace HackedDesign
         {
             this.mainCamera.transform.rotation = Quaternion.Euler(this.mainCamera.transform.rotation.eulerAngles.x, this.mainCamera.transform.rotation.eulerAngles.y + orbit * settings.orbitSpeed * Time.deltaTime, this.mainCamera.transform.rotation.eulerAngles.z);
 
-            RaycastHit hit;
             Ray ray = mainCamera.ScreenPointToRay(this.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 100, aimMask))
+            if (Physics.RaycastNonAlloc(ray, raycastHits, 100, aimMask) > 0)
             {
 
-                var rotation = Quaternion.LookRotation(hit.point - this.transform.position, Vector3.up);
-                body.rotation = rotation; //Quaternion.Euler(0, rotation.eulerAngles.y, 0);
-
-                /*
-                RaycastHit aimHit;
-
-                if (Physics.Raycast(body.position + Vector3.up, body.forward, out aimHit, 5, crosshairMask))
-                {
-                    aimPoint.transform.position = aimHit.point;
-                }
-                else
-                {
-                    aimPoint.transform.position = body.position + Vector3.up + (body.forward * 5);
-                }
-
-                aimPoint.transform.position = this.transform.position + (this.transform.forward * 5);
-                aimPoint.transform.LookAt(body.position, Vector3.up);*/
+                var rotation = Quaternion.LookRotation(raycastHits[0].point - this.transform.position, Vector3.up);
+                body.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
 
             }
 
@@ -138,10 +123,18 @@ namespace HackedDesign
             AudioManager.Instance.PlayCoolant();
         }
 
-        public void OnOrbit(InputValue value)
-        {
-            this.orbit = value.Get<float>();
-        }
+        // public void OnOrbit(InputValue value)
+        // {
+        //     Debug.Log(value.);
+        //     /*
+        //     if (value.isPressed)
+        //     {
+        //         this.orbit = value.Get<float>();
+        //     }
+        //     else {
+        //         this.orbit = 0;
+        //     }*/
+        // }
 
         public void OnChangeWeapon(InputValue value)
         {

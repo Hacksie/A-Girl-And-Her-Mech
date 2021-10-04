@@ -40,52 +40,16 @@ namespace HackedDesign
             }
         }
 
-        public void UpdateWave()
-        {
-            switch (GameManager.Instance.GameData.waveState)
-            {
-                default:
-                case WaveState.Incoming:
-                    UpdateIncoming();
-                    break;
-                case WaveState.Attacking:
-                    UpdateAttacking();
-                    break;
-                case WaveState.Intermission:
-                    UpdateIntermission();
-                    break;
-            }
-        }
-
         public void UpdateBehaviour() => 
-            currentEnemies.ForEach((e) => { if (e.gameObject.activeInHierarchy) e.UpdateBehaviour(); });
-        
+            currentEnemies.ForEach((e) => { if (e.gameObject.activeInHierarchy) e.UpdateBehaviour(); });        
 
-        private void UpdateIncoming()
-        {
-            var data = GameManager.Instance.GameData;
-            var settings = GameManager.Instance.GameSettings;
+        public void FreezeAll() =>
+            currentEnemies.ForEach((e) => { if(e.gameObject.activeInHierarchy) e.Freeze(); });
 
-            data.incomingTimer -= Time.deltaTime;
+        public bool AllEnemiesAreDead() => currentEnemies.All(e => !e.gameObject.activeInHierarchy);
+      
 
-            if (data.incomingTimer <= 0)
-            {
-                data.incomingTimer = settings.incomingTimer;
-                data.waveState = WaveState.Attacking;
-                SpawnWave();
-            }
-        }
-
-        private void UpdateAttacking()
-        {
-            // Check all enemies are dead
-            if (currentEnemies.All(e => !e.gameObject.activeInHierarchy))
-            {
-                GameManager.Instance.GameData.waveState = WaveState.Intermission;
-            }
-        }
-
-        private void SpawnWave()
+        public void SpawnWave()
         {
             currentEnemies.ForEach(e => Destroy(e));
             currentEnemies.Clear();
@@ -128,17 +92,6 @@ namespace HackedDesign
             return results;
         }
 
-        private void UpdateIntermission()
-        {
-            var data = GameManager.Instance.GameData;
-            data.intermissionTimer -= Time.deltaTime;
 
-            if (data.intermissionTimer <= 0)
-            {
-                data.intermissionTimer = GameManager.Instance.GameSettings.intermissionTimer;
-                data.waveState = WaveState.Incoming;
-                data.wave++;
-            }
-        }
     }
 }

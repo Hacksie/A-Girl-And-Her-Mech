@@ -31,6 +31,8 @@ namespace HackedDesign
         public bool wturretWorking = false;
         public bool eturretWorking = false;
 
+        public bool showFPS = false;
+
         public WaveState waveState;
         public UI.MenuState menuState;
 

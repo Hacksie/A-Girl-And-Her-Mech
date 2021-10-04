@@ -19,6 +19,8 @@ namespace HackedDesign
         [SerializeField] private AudioSource incomingMusic;
         [SerializeField] private AudioSource attackMusic;
         [SerializeField] private AudioSource intermissionMusic;
+        [SerializeField] private AudioSource deadMusic;
+        [SerializeField] private AudioSource successMusic;
 
         public static AudioManager Instance { get; private set; }
 
@@ -138,6 +140,27 @@ namespace HackedDesign
         public void StopIntermissionMusic()
         {
             intermissionMusic?.Stop();
-        }            
+        }      
+
+        public void PlayDeadMusic()
+        {
+            deadMusic?.Play();
+        }
+
+        public void StopDeadMusic()
+        {
+            deadMusic?.Stop();
+        }        
+
+        public void PlaySuccessMusic()
+        {
+            successMusic?.Play();
+        }
+
+        public void StopSuccessMusic()
+        {
+            successMusic?.Stop();
+        }             
+
     }
 }

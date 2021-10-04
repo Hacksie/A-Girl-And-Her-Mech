@@ -51,6 +51,7 @@ namespace HackedDesign
                     GameManager.Instance.EntityPool.FireGuass(parent, firePoint.position, firePoint.forward, damage);
                     break;
                 case AmmoType.Missile:
+                    Debug.Log("Fire missile");
                     GameManager.Instance.EntityPool.FireMissile(parent, firePoint.position, firePoint.forward, damage);
                     break;
                 case AmmoType.Laser:

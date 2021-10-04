@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Orbit",
-                    "type": "Value",
-                    "id": "75f8805e-56f9-48ce-9471-68bb901c5816",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "ChangeWeapon",
                     "type": "Button",
                     "id": "c39863df-a4e0-42c4-97b2-95313577d578",
@@ -400,116 +391,6 @@
                     "action": "MousePosition",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "1fac98eb-1227-4679-a7e3-5c282a9e1cf9",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Orbit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "b0fc9538-3684-4bb1-b49c-906eb571b4b5",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Orbit",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "d3e47aeb-ee8e-430d-8cb9-af449a308036",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Orbit",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "9664a4aa-2ac9-4c9d-8e05-5290cd90089e",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Orbit",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "439b261d-23ba-440b-9194-7457b1460746",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Orbit",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "54a2bc9f-6175-454e-a59c-18ec12bb967c",
-                    "path": "<Keyboard>/numpad7",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Orbit",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "ad91ca94-8c28-4e49-9245-39ea12439064",
-                    "path": "<Keyboard>/numpad9",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Orbit",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "e590828b-f0e5-40b4-b6b8-05c7033742a6",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Orbit",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "8801f2c4-b6b1-4d9f-a091-f067871e602c",
-                    "path": "<Keyboard>/delete",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Orbit",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "82d9d101-9b56-4362-9492-1be7791118db",
-                    "path": "<Keyboard>/pageDown",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Orbit",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",

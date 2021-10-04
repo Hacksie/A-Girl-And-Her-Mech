@@ -2,10 +2,10 @@ using UnityEngine;
 
 namespace HackedDesign
 {
-    public class GameOverState : IState
+    public class SuccessState : IState
     {
         UI.AbstractPresenter gameoverPanel;
-        public GameOverState(UI.AbstractPresenter gameoverPanel)
+        public SuccessState(UI.AbstractPresenter gameoverPanel)
         {
             this.gameoverPanel = gameoverPanel;
         }
@@ -20,14 +20,15 @@ namespace HackedDesign
             this.gameoverPanel.Repaint();
             AudioManager.Instance.StopIncomingMusic();
             AudioManager.Instance.StopAttackMusic();
-            AudioManager.Instance.StopIntermissionMusic();      
-            AudioManager.Instance.PlayDeadMusic();
+            AudioManager.Instance.StopIntermissionMusic();   
+            AudioManager.Instance.PlaySuccessMusic();
+
         }
 
         public void End()
         {
             this.gameoverPanel.Hide();
-            AudioManager.Instance.StopDeadMusic();
+            AudioManager.Instance.StopSuccessMusic();
             
         }
 

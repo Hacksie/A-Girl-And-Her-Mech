@@ -22,6 +22,8 @@ namespace HackedDesign.UI
         [SerializeField] private UnityEngine.UI.Text lsAmmoText;
         [SerializeField] private GameObject radarPanel;
         [SerializeField] private List<UnityEngine.UI.Image> weaponSprites;
+        [SerializeField] private UnityEngine.UI.Image healthBarFill;
+        [SerializeField] private UnityEngine.UI.Image heatBarFill;
         [SerializeField] private Color healthOk;
         [SerializeField] private Color healthWarn;
         [SerializeField] private Color healthDanger;
@@ -33,6 +35,7 @@ namespace HackedDesign.UI
         public override void Repaint()
         {
             var data = GameManager.Instance.GameData;
+            var settings = GameManager.Instance.GameSettings;
             baseHealthbar.value = data.baseHealth;
 
             healthBar.value = data.armour;
@@ -40,6 +43,32 @@ namespace HackedDesign.UI
             coolantBar.value = data.coolant;
 
             heatText.color = data.heat > 100 ? Color.red : Color.white;
+
+            if(data.armour <= settings.healthDangerAmount)
+            {
+                healthBarFill.color = healthDanger;
+            }
+            else if(data.armour <= settings.healthWarnAmount)
+            {
+                healthBarFill.color = healthWarn;
+            }
+            else
+            {
+                healthBarFill.color = healthOk;
+            }
+
+            if(data.heat >= settings.heatDangerAmount)
+            {
+                heatBarFill.color = healthDanger;
+            }
+            else if(data.heat >= settings.heatWarnAmount)
+            {
+                heatBarFill.color = healthWarn;
+            }
+            else
+            {
+                heatBarFill.color = healthOk;
+            }
 
             healthText.text = data.armour.ToString("N0");
             heatText.text = data.heat.ToString("N0");

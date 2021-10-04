@@ -48,6 +48,7 @@ namespace HackedDesign
         {
             if (gameObject.activeInHierarchy)
             {
+                this.agent.isStopped = false;
                 var playerDistance = (transform.position - GameManager.Instance.Player.transform.position).sqrMagnitude;
                 var baseDistance = (transform.position - Vector3.zero).sqrMagnitude;
                 var attackSqr = attackRange * attackRange;
@@ -78,6 +79,14 @@ namespace HackedDesign
             }
         }
 
+        public void Freeze()
+        {
+            this.agent.isStopped = true;
+            this.agent.velocity = Vector3.zero;
+            Animate();
+        }
+
+
         private void UpdateTurret(Vector3 target)
         {
             var rotation = Quaternion.LookRotation((target - transform.position), Vector3.up);
@@ -86,6 +95,7 @@ namespace HackedDesign
 
             //turret.transform.forward = new Vector3(forward.x, 0, forward.z);
             turret.rotation = Quaternion.Lerp(turret.rotation, targetAngle, rotateSpeed * Time.deltaTime);
+            //turret.rotation = targetAngle;
         }
 
         private bool CheckInRange() => !gameObject.activeInHierarchy || (transform.position - Vector3.zero).sqrMagnitude < (GameManager.Instance.GameSettings.stopRange * GameManager.Instance.GameSettings.stopRange);
@@ -109,6 +119,8 @@ namespace HackedDesign
             {
                 healthBar.localScale = scale;
             }
+
+            healthBar.transform.LookAt(GameManager.Instance.MainCamera.transform);
         }
 
         private void Animate()
