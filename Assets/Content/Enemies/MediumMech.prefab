@@ -86,7 +86,7 @@ MonoBehaviour:
   maxAmmo: 0
   ammoType: 3
   fireRate: 0.2
-  damage: 2
+  damage: 1.5
   heat: 2
   sprite: {fileID: 21300000, guid: d8e79bf571606f24c82dfccb2b4533de, type: 3}
   isPlayer: 0
@@ -3435,7 +3435,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 871
+  m_VersionIndex: 877
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -6736,7 +6736,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1074
+  m_VersionIndex: 1077
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -7322,8 +7322,8 @@ MonoBehaviour:
   ammo: 0
   maxAmmo: 0
   ammoType: 2
-  fireRate: 0.2
-  damage: 10
+  fireRate: 0.3
+  damage: 4
   heat: 10
   sprite: {fileID: 21300000, guid: 206929b2cbdba604bbd66c43ba89f9c5, type: 3}
   isPlayer: 0
@@ -7351,7 +7351,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032162449459514368}
   m_LocalRotation: {x: -0, y: -0, z: 0.51353693, w: 0.85806745}
-  m_LocalPosition: {x: -0.674299, y: 1.2084734, z: 0.629}
+  m_LocalPosition: {x: -0.674299, y: 1.2084734, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7924,7 +7924,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 674
+  m_VersionIndex: 677
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -8590,7 +8590,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1008
+  m_VersionIndex: 1011
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -9256,7 +9256,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1194
+  m_VersionIndex: 1200
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -9922,7 +9922,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1008
+  m_VersionIndex: 1014
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -10106,8 +10106,8 @@ MonoBehaviour:
   ammo: 0
   maxAmmo: 0
   ammoType: 2
-  fireRate: 0.2
-  damage: 10
+  fireRate: 0.3
+  damage: 4
   heat: 10
   sprite: {fileID: 21300000, guid: 206929b2cbdba604bbd66c43ba89f9c5, type: 3}
   isPlayer: 0
@@ -10677,7 +10677,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 674
+  m_VersionIndex: 677
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -11343,7 +11343,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 871
+  m_VersionIndex: 874
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -12095,7 +12095,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 674
+  m_VersionIndex: 677
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -12827,7 +12827,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1083
+  m_VersionIndex: 1086
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -13493,7 +13493,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 674
+  m_VersionIndex: 680
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -13648,7 +13648,7 @@ MonoBehaviour:
   maxAmmo: 0
   ammoType: 3
   fireRate: 0.5
-  damage: 4
+  damage: 3
   heat: 2
   sprite: {fileID: 21300000, guid: fcf70ff9a923c16479afe1582093199b, type: 3}
   isPlayer: 0
@@ -14281,7 +14281,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 671
+  m_VersionIndex: 677
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -14901,7 +14901,7 @@ MonoBehaviour:
   ammo: 0
   maxAmmo: 0
   ammoType: 3
-  fireRate: 0.75
+  fireRate: 1
   damage: 20
   heat: 5
   sprite: {fileID: 21300000, guid: caa7260c27ee909448472976ecdd36cf, type: 3}
@@ -15567,7 +15567,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1073
+  m_VersionIndex: 1076
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -16233,7 +16233,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 674
+  m_VersionIndex: 677
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -16419,7 +16419,7 @@ MonoBehaviour:
   ammo: 0
   maxAmmo: 0
   ammoType: 3
-  fireRate: 0.75
+  fireRate: 1
   damage: 20
   heat: 5
   sprite: {fileID: 21300000, guid: caa7260c27ee909448472976ecdd36cf, type: 3}
@@ -18008,7 +18008,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1005
+  m_VersionIndex: 1011
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -20062,7 +20062,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1077
+  m_VersionIndex: 1083
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -20528,7 +20528,7 @@ MonoBehaviour:
   maxAmmo: 0
   ammoType: 4
   fireRate: 2
-  damage: 40
+  damage: 30
   heat: 22
   sprite: {fileID: 21300000, guid: c74d609a8d12a0641a33f28c81a036bd, type: 3}
   isPlayer: 0
@@ -21919,7 +21919,7 @@ MonoBehaviour:
   ammo: 0
   maxAmmo: 0
   ammoType: 3
-  fireRate: 0.75
+  fireRate: 1
   damage: 20
   heat: 5
   sprite: {fileID: 21300000, guid: caa7260c27ee909448472976ecdd36cf, type: 3}
@@ -21948,9 +21948,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032162450162776641}
-  m_LocalRotation: {x: -0, y: -0, z: -0.5070824, w: 0.8618976}
-  m_LocalPosition: {x: -0.859, y: -1.135, z: 0.004000008}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.50708234, w: 0.86189765}
+  m_LocalPosition: {x: -0.859, y: -1.1350002, z: 0.004000008}
+  m_LocalScale: {x: 1.0000002, y: 1.0000002, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2032162449965683580}
@@ -21979,7 +21979,7 @@ MonoBehaviour:
   maxAmmo: 0
   ammoType: 3
   fireRate: 0.2
-  damage: 2
+  damage: 1.5
   heat: 2
   sprite: {fileID: 21300000, guid: d8e79bf571606f24c82dfccb2b4533de, type: 3}
   isPlayer: 0
@@ -22549,7 +22549,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1073
+  m_VersionIndex: 1076
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -22899,7 +22899,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1040
+  m_VersionIndex: 1049
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -23015,7 +23015,7 @@ MonoBehaviour:
   maxAmmo: 0
   ammoType: 4
   fireRate: 2
-  damage: 40
+  damage: 30
   heat: 22
   sprite: {fileID: 21300000, guid: c74d609a8d12a0641a33f28c81a036bd, type: 3}
   isPlayer: 0
@@ -23585,7 +23585,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1191
+  m_VersionIndex: 1197
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -24251,7 +24251,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1191
+  m_VersionIndex: 1197
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -24917,7 +24917,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1008
+  m_VersionIndex: 1011
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -25072,7 +25072,7 @@ MonoBehaviour:
   maxAmmo: 0
   ammoType: 3
   fireRate: 0.2
-  damage: 2
+  damage: 1.5
   heat: 2
   sprite: {fileID: 21300000, guid: d8e79bf571606f24c82dfccb2b4533de, type: 3}
   isPlayer: 0
@@ -26856,7 +26856,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 671
+  m_VersionIndex: 674
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -27611,7 +27611,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1008
+  m_VersionIndex: 1011
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -27764,8 +27764,8 @@ MonoBehaviour:
   ammo: 0
   maxAmmo: 0
   ammoType: 2
-  fireRate: 0.2
-  damage: 10
+  fireRate: 0.3
+  damage: 4
   heat: 10
   sprite: {fileID: 21300000, guid: 206929b2cbdba604bbd66c43ba89f9c5, type: 3}
   isPlayer: 0
@@ -27793,7 +27793,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032162450444317804}
   m_LocalRotation: {x: -0, y: -0, z: 0.40462336, w: 0.9144835}
-  m_LocalPosition: {x: -0.665, y: 1.208, z: 0.624}
+  m_LocalPosition: {x: -0.665, y: 1.208, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28946,7 +28946,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1011
+  m_VersionIndex: 1014
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -29643,7 +29643,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 871
+  m_VersionIndex: 874
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -30309,7 +30309,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 668
+  m_VersionIndex: 674
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -30975,7 +30975,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 665
+  m_VersionIndex: 668
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -32308,7 +32308,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1083
+  m_VersionIndex: 1086
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -33640,7 +33640,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1002
+  m_VersionIndex: 1005
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -34741,7 +34741,7 @@ MonoBehaviour:
   maxAmmo: 0
   ammoType: 3
   fireRate: 0.5
-  damage: 4
+  damage: 3
   heat: 2
   sprite: {fileID: 21300000, guid: fcf70ff9a923c16479afe1582093199b, type: 3}
   isPlayer: 0
@@ -36631,7 +36631,7 @@ MonoBehaviour:
   maxAmmo: 0
   ammoType: 3
   fireRate: 0.5
-  damage: 4
+  damage: 3
   heat: 2
   sprite: {fileID: 21300000, guid: fcf70ff9a923c16479afe1582093199b, type: 3}
   isPlayer: 0
@@ -37115,7 +37115,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 680
+  m_VersionIndex: 686
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -37781,7 +37781,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1074
+  m_VersionIndex: 1077
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -38632,7 +38632,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1011
+  m_VersionIndex: 1014
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -39428,7 +39428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032162450916711606}
   m_LocalRotation: {x: -0, y: -0, z: 0.51353693, w: 0.85806745}
-  m_LocalPosition: {x: -0.674299, y: 1.2084734, z: 0.629}
+  m_LocalPosition: {x: -0.674299, y: 1.2084734, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -41316,9 +41316,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032162451013131323}
-  m_LocalRotation: {x: -0, y: -0, z: -0.5070824, w: 0.8618976}
-  m_LocalPosition: {x: -0.859, y: -1.135, z: 0.004000008}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.50708234, w: 0.86189765}
+  m_LocalPosition: {x: -0.85900015, y: -1.1350002, z: 0.004000008}
+  m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2032162449495008703}
@@ -41347,7 +41347,7 @@ MonoBehaviour:
   maxAmmo: 0
   ammoType: 3
   fireRate: 0.2
-  damage: 2
+  damage: 1.5
   heat: 2
   sprite: {fileID: 21300000, guid: d8e79bf571606f24c82dfccb2b4533de, type: 3}
   isPlayer: 0
@@ -43748,7 +43748,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 671
+  m_VersionIndex: 677
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -44567,8 +44567,8 @@ MonoBehaviour:
   ammo: 0
   maxAmmo: 0
   ammoType: 2
-  fireRate: 0.2
-  damage: 10
+  fireRate: 0.3
+  damage: 4
   heat: 10
   sprite: {fileID: 21300000, guid: 206929b2cbdba604bbd66c43ba89f9c5, type: 3}
   isPlayer: 0
@@ -45020,7 +45020,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 680
+  m_VersionIndex: 683
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -45686,7 +45686,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 665
+  m_VersionIndex: 668
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -47374,7 +47374,7 @@ MonoBehaviour:
   ammo: 0
   maxAmmo: 0
   ammoType: 3
-  fireRate: 0.75
+  fireRate: 1
   damage: 20
   heat: 5
   sprite: {fileID: 21300000, guid: caa7260c27ee909448472976ecdd36cf, type: 3}
@@ -47945,7 +47945,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 668
+  m_VersionIndex: 674
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -48611,7 +48611,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1077
+  m_VersionIndex: 1080
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -49949,7 +49949,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1005
+  m_VersionIndex: 1008
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -50828,7 +50828,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6608116022529399983}
   m_LocalRotation: {x: -0, y: -0, z: 0.40462336, w: 0.9144835}
-  m_LocalPosition: {x: -0.665, y: 1.208, z: 0.624}
+  m_LocalPosition: {x: -0.665, y: 1.208, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51401,7 +51401,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1188
+  m_VersionIndex: 1194
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -52067,7 +52067,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 871
+  m_VersionIndex: 874
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -52222,7 +52222,7 @@ MonoBehaviour:
   maxAmmo: 0
   ammoType: 3
   fireRate: 0.5
-  damage: 4
+  damage: 3
   heat: 2
   sprite: {fileID: 21300000, guid: fcf70ff9a923c16479afe1582093199b, type: 3}
   isPlayer: 0
@@ -52792,7 +52792,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1002
+  m_VersionIndex: 1005
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
